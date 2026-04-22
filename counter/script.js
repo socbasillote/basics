@@ -9,21 +9,33 @@ let count = 0;
 const MIN = 0;
 const MAX = 10;
 
+let hasInteracted = false;
+
+
 function handleIncrement(){
+    hasInteracted = true;
     if (count >= MAX) return;
     count++;
     render();
 }
 
 function handleDecrement(){
+    hasInteracted = true;
     if (count <= MIN) return;
     count--;
     render();
 }
 
-function render(){
+function renderCount(){
     countEl.textContent = count;
-    
+}
+
+function messageFunc() {
+    if (!hasInteracted){
+        message.textContent = "";
+        return
+    }
+
     if(count === MAX) {
         message.textContent = "Max reached" 
     } else if (count === MIN){
@@ -31,14 +43,25 @@ function render(){
     } else {
         message.textContent = "";
     }
+    
+}
+function buttons() {
+    let disMax = count === MAX;
+    let disMin = count === MIN;
 
-    increment.disabled = count === MAX;
-    decrement.disabled = count === MIN;
+    increment.disabled = disMax;
+    decrement.disabled = disMin;
+}
+
+function render(){
+    renderCount();
+    messageFunc();
+    buttons();
 }
 
 increment.addEventListener("click", handleIncrement)
-
 decrement.addEventListener("click", handleDecrement)
+
 
 
 render();
