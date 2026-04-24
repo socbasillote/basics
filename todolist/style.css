@@ -1,0 +1,10 @@
+.completed{
+    color: #a0a0a0
+}
+.deleteBtn{
+    background-color: rgb(163, 31, 31);
+    color:white;
+    border-color: #cfcfcf;
+    border: solid 0.1;
+    padding: 3px;
+}
