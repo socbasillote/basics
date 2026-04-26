@@ -4,16 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css"
 </head>
 <body>
     <h1>Test</h1>
+    <button id="darkMode">Dark Mode</button>
     <button id="btn">Change Text</button>
+
+    <input id="showPassword" type="password" placeholder="Password"/>
+    <button id="btnPassword">Show password</button>
     <script>
+        let states = true;
         const btn = document.getElementById("btn");
+        const darkMode = document.getElementById("darkMode");
+        const btnPassword = document.getElementById("btnPassword");
+        
+        btnPassword.addEventListener("click", () => {
+            const passw = document.getElementById("showPassword");
+            passw.type = passw.type === "password" ? "text" :"password";
+        })
+        darkMode.addEventListener("click", () => {
+            document.body.classList.toggle('darkMode');
+            console.log("ss")
+        })
+
         btn.addEventListener("click", () => {
-            document.querySelector("h1").style.color = "blue";
+            if(states) {
+                document.querySelector("h1").style.color = "blue";
+                states = false;
+            } else {
+                document.querySelector("h1").style.color = "red";
+                states = true;
+            }
             
         })
-    </script>
+    </script>  
 </body>
 </html>
