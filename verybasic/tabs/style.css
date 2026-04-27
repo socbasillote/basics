@@ -11,11 +11,24 @@
 }
 
 .tab-panel {
-    display: none;
     padding: 20px;
-    border: 1px solid #ccc
+    border: 1px solid #ccc;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease;
 }
-
+.tabs__content {
+    position: relative;
+    min-height: 100px; /* prevents layout jump */
+}
 .tab-panel.active {
     display: block;
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    transform: translateY(0);
 }

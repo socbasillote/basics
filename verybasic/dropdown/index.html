@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" >
+</head>
+<body>
+    <h1>Dropdown</h1>
+
+    <div class="dropdown" id="dropdown">
+        <button class="dropdown__toggle" data-dropdown-button>
+            Menu
+        </button>
+
+        <div class="dropdown__menu" data-dropdown-menu>
+            <a href="#">Profile</a>
+            <a href="#">Settings</a>
+            <a href="#">Logout</a>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!-- 
+Why this structure?
+id="dropdown" -> root container
+data-dropdown-button -> identified trigger
+data-dropdown-menu -> identifies controlled element
+ -->

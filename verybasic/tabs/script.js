@@ -3,22 +3,25 @@ const tabsContainer = document.getElementById("tabs");
 // Event Delegation (important)
 tabsContainer.addEventListener("click", function (e) {
     const clickedTab = e.target.closest(".tab");
-    console.log(clickedTab)
+    
     // Guard clause
     if (!clickedTab) return;
 
     const tabId = clickedTab.dataset.tab;
 
-    // Remove active from all tabs
     const allTabs = tabsContainer.querySelectorAll(".tab");
-    allTabs.forEach(tab => tab.classList.remove("active"));
-
-    // Remove active from all content
     const allPanels = tabsContainer.querySelectorAll(".tab-panel");
-    allPanels.forEach(panel => panel.classList.remove("active"));
 
+    allTabs.forEach(tab => tab.classList.remove("active"));
     // Active clicked tab
     clickedTab.classList.add("active");
+
+    
+    allPanels.forEach(panel => {
+        if( panel.classList.contains("active")) {
+            panel.classList.remove("active");
+        }
+    });
 
     // Active matching content
     const targetPanel = tabsContainer.querySelector(
@@ -26,6 +29,9 @@ tabsContainer.addEventListener("click", function (e) {
     );
 
     if (targetPanel) {
-        targetPanel.classList.add("active");
+        // slight delay ensures transition kicks in properly
+        requestAnimationFrame(() => {
+            targetPanel.classList.add("active");
+        })
     }
 })
