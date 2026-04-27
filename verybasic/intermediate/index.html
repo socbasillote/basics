@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intermediate</title>
+    <link rel="stylesheet" href="style.css" >
+</head>
+<body>
+    <h1>Intermediate</h1>
+    <div style="display: none;">
+        <h2>Counter</h2>
+        <p id="countEl">0</p>
+        <div>
+            <button id="incrementBtn">Increment</button>
+            <button id="decrementBtn">Decrement</button>
+        </div>
+    </div>
+
+
+    <div>
+        <h2>Tab</h2>
+
+        <div id="tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn" data-tab="home">Home</button>
+                <button class="tab-btn" data-tab="profile">Profile</button>
+                <button class="tab-btn" data-tab="settings">Settings</button>
+            </div>
+
+            <div class="tab-content" data-tab="home">Home content</div>
+            <div class="tab-content" data-tab="profile">Profile Content</div>
+            <div class="tab-content" data-tab="settings">Settings Content</div>
+        </div>
+    </div>
+
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
+
+<!-- 
+id = tabs
+    - Used as container hook
+    - Keeps event handling scoped (cleaner faster)
+
+class="active"
+    - Controls visual state
+    - CSS decides what "active" looks like
+    - JS just toggles it
+
+data-tab="home"
+    - Connects button <-/-> content
+    - This is the logic bridge 
+-->
