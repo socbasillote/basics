@@ -1,0 +1,42 @@
+.gallery__main{
+    position: relative;
+    width: 300px;
+}
+
+.nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+}
+.prev {left: 0;}
+.next {right: 0;}
+.gallery__main img{
+    width: 300px;
+    height: auto;
+    display: block;
+    margin-bottom: 12px;
+    transition: opacity 0.3s ease;
+}
+
+.gallery__thumbs {
+    display: flex;
+    gap: 8px;
+}
+
+.thumb {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    opacity: 0.6;
+    border: 2px solid transparent;
+}
+
+.thumb.active {
+    opacity: 1;
+    border-color: #333;
+}

@@ -1,8 +1,12 @@
 // OPEN MODAL
 document.addEventListener("click", function (e) { 
     const openBtn = e.target.closest("[data-modal-open]");
+    
     if (openBtn) {
+        console.log(openBtn.dataset);
         const selector = openBtn.dataset.modalOpen;
+        
+        console.log(selector)
         const modal = document.querySelector(selector);
         if (modal) modal.classList.add("active");
         return;
