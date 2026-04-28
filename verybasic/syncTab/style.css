@@ -1,0 +1,12 @@
+.tab-panel{
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+.tab.active {
+    background: #333;
+    color: #fff;
+}
