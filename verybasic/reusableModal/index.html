@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Modal</h1>
+
+    <button data-modal-open="#loginModal">Login</button>
+    <button data-modal-open="#signupModal">Signup</button>
+
+    <div class="modal" id="loginModal">
+        <div class="modal__overlay" data-modal-close></div>
+        <div class="modal__content">
+            <button data-modal-close>&times;</button>
+            <h2>Login</h2>
+        </div>
+    </div>
+
+    <div class="modal" id="signupModal">
+        <div class="modal__overlay" data-model-close></div>
+        <div class="modal__content">
+            <button data-modal-close>&times;</button>
+            <h2>Signup</h2>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+    
+</body>
+</html>
