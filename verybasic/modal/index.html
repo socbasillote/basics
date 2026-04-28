@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style.css" >
+</head>
+<body>
+    <h1>Modal</h1>
+
+    <button data-modal-open="#modal">Open Modal</button>
+
+    <div class="modal" id="modal">
+        <div class="modal__overlay" data-modal-close></div>
+
+        <div class="modal__content">
+            <div class="modal__close" data-modal-close>&times;</div>
+
+            <h2>Modal Title</h2>
+            <p>This is modal content</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

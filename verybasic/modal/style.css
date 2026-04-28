@@ -1,0 +1,33 @@
+.modal {
+    position: fixed;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal__content {
+    position: relative;
+    background: white;
+    width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    z-index: 1;
+    transform: scale(0.9);
+    transition: transform 0.25s ease;
+}
+
+.modal.active .modal__content {
+    transform: scale(1);
+}

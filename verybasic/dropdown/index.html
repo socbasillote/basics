@@ -16,7 +16,19 @@
 
         <div class="dropdown__menu" data-dropdown-menu>
             <a href="#">Profile</a>
-            <a href="#">Settings</a>
+
+            <!-- Nested Dropdown-->
+             <div class="dropdown">
+                <button class="dropdown__toggle" data-dropdown-button>
+                    Settings
+                </button>
+
+                <div class="dropdown__menu" data-dropdown-menu>
+                    <a href="#">Account</a>
+                    <a href="#">Privacy</a>
+                </div>
+             </div>
+
             <a href="#">Logout</a>
         </div>
     </div>
