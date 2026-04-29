@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vanilla JS CRUD List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h2>CRUD List</h2>
+
+  <input type="text" id="itemInput" placeholder="Enter item">
+  <button onclick="addItem()">Add</button>
+
+  <ul id="list"></ul>
+
+  <script>
+    let items = JSON.parse(localStorage.getItem('items')) || [];
+    let editIndex = null;
+
+    function render() {
+      const list = document.getElementById('list');
+      list.innerHTML = '';
+
+      items.forEach((item, index) => {
+        const li = document.createElement('li');
+
+        li.innerHTML = `
+          <span>${item}</span>
+          <div>
+            <button onclick="editItem(${index})">Edit</button>
+            <button onclick="deleteItem(${index})">Delete</button>
+          </div>
+        `;
+
+        console.log(index);
+        list.appendChild(li);
+      });
+
+      localStorage.setItem('items', JSON.stringify(items));
+    }
+
+    function addItem() {
+      const input = document.getElementById('itemInput');
+      const value = input.value.trim();
+
+      if (!value) return;
+
+      if (editIndex === null) {
+        items.push(value);
+      } else {
+        items[editIndex] = value;
+        editIndex = null;
+      }
+
+      input.value = '';
+      render();
+    }
+
+    function editItem(index) {
+      const input = document.getElementById('itemInput');
+      input.value = items[index];
+      editIndex = index;
+    }
+
+    function deleteItem(index) {
+      items.splice(index, 1);
+      render();
+    }
+
+    render();
+  </script>
+
+</body>
+</html>

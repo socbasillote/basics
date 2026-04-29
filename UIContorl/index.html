@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tester</title>
+    <link rel="stylesheet" href="style.css" >
+</head>
+<body>
+    
+    <div>
+        <input type="text" placeholder="Add a list" class="inputList"/>
+        <button id="addBtn">Add</button>
+    </div>
+
+    <div>
+        <ul id="lists"></ul>
+    </div>
+    
+    <script>
+
+        
+        let currentId = 0;
+        const lists = document.getElementById("lists");
+
+        const inputList = document.querySelector(".inputList");
+        const addBtn = document.getElementById("addBtn");
+
+
+        lists.addEventListener("click", (e) => {
+            const li = e.target.closest("li");
+            const id = Number(li.dataset.id);
+
+            deleteList(id);
+        });
+
+        function deleteList(id){
+            const li = document.querySelector(`li[data-id="${id}"]`);
+            if (li) li.remove();
+        }
+
+        function appendList(list){
+            const li = document.createElement("li");
+            li.dataset.id = list.id;
+
+            li.innerHTML = `
+                ${list.name}
+            `;
+            
+            lists.appendChild(li);
+        }   
+
+        function addList(){
+            let value = inputList.value.trim();
+            if (!value) return;
+
+            console.log(value)
+            const newList = {
+                id: ++currentId,
+                name: value
+            }
+
+            appendList(newList);
+            inputList.value = "";
+        }
+
+        addBtn.addEventListener("click", addList);
+
+    
+
+    </script>
+    
+</body>
+</html>
+
+
+<!-- 1. Toggle text -->
+<!-- 
+
+    <p class="modifyText">modify me</p>
+
+    <button id="btn">modify</button>
+    <script>
+        const btn = document.getElementById("btn");
+        const modifyText = document.querySelector(".modifyText")
+        let stateStatus = false;
+        btn.addEventListener("click", () => {
+            if (!stateStatus) {
+                 modifyText.classList.add("active");
+                 stateStatus = true;
+            } else {
+                modifyText.classList.remove("active");
+                stateStatus = false;
+            }
+           
+        }) 
+    </script>
+-->
+
+<!-- 2. Show / Hide Element -->
+<!-- 
+    <div class="box">
+        <p> put me inside the box</p>
+    </div>
+
+    <button id="btn">modify</button>
+    <script>
+        const btn = document.getElementById("btn");
+        const box = document.querySelector(".box")
+
+        btn.addEventListener("click", () => {
+            box.classList.toggle("styling")
+           
+        }) 
+    </script> 
+    -->
