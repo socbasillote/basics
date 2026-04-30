@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1 id="h1id" data-h1Data="selectedfromattribute">Selector Id</h1>
+    
+    <div class="notId"></div>
+    <ul id="list">
+        <li data-id="1">list 1</li>
+        <li data-id="2">list 2</li>
+        <li data-id="3">list 3</li>
+    </ul>
+
+    <button id="btnId">Change them</button>
+
+    <script>
+
+        const selectId = document.getElementById("h1id");
+        const selectClass = document.getElementsByClassName("notId");
+
+        let list = document.getElementById("list");
+        const li = document.querySelectorAll("li");
+
+        const btnId = document.getElementsByTagName("button");
+
+        btnId[0].addEventListener("click", () => {
+            console.log('test')
+            rotate(list);
+        })
+
+        function rotate(list){
+            if (!list || list.children.length === 0) return;
+
+            const lastItem = list.lastElementChild;
+            list.insertBefore(lastItem, list.firstElementChild);
+            
+        }
+
+        console.log(list.insertBefore(list.lastElementChild, list.firstElementChild))
+        console.log(list.firstElementChild.textContent)
+        console.log(list.lastElementChild.textContent)
+        
+        
+    </script>
+</body>
+</html>
