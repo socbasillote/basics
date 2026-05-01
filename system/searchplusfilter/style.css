@@ -1,0 +1,8 @@
+.item.hidden {
+    display: none;
+}
+
+.filter-btn.active {
+    background: #333;
+    color: white;
+}

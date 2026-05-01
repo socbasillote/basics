@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="app" id="app">
+
+        <!-- Controls -->
+         <div class="controls">
+            <input type="text" placeholder="Search..." data-search />
+
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+         </div>
+
+         <!-- List -->
+          <ul class="list">
+            <li class="item" data-status="active">Buy groceries</li>
+            <li class="item" data-status="completed">Read book</li>
+            <li class="item" data-status="active">Write code</li>
+            <li class="item" data-status="completed">workout</li>
+          </ul>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
