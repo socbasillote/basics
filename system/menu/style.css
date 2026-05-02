@@ -1,0 +1,31 @@
+.select {
+  position: relative;
+  width: 200px;
+}
+
+.select__menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  background: white;
+  display: none;
+}
+
+.select.open .select__menu {
+  display: block;
+}
+
+.select__option {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.select__option.focused {
+  background: #eee;
+}
+
+.select__option.selected {
+  font-weight: bold;
+}
