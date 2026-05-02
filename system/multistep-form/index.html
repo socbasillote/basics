@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-step Form</title>
+    <link rel="stylesheet" href="style.css" >
+</head>
+<body>
+    
+    <h1>Multi-step From</h1>
+
+    <form id="form" novalidate>
+
+        <!-- Progress -->
+        <div class="progress">
+            <div class="progress__bar" data-progress></div>
+        </div>
+
+        <!-- STEP 1 -->
+         <div class="step active" data-step="0">
+            <h2>Account</h2>
+            <input type="email" placeholder="Email" data-field="email" />
+            <input type="password" placeholder="Password" data-field="password" />
+         </div>
+
+         <!-- STEP 2 -->
+          <div class="step" data-step="1">
+            <h2>Profile</h2>
+            <input type="text" placeholder="Full Name" data-field="name" />
+          </div>
+
+          <!-- STEP 3 -->
+           <div class="step" data-step="2">
+            <h2>Confirm</h2>
+            <p>Review your data and submit</p>
+           </div>
+
+           <!-- NAVIGATION -->
+            <div class="nav">
+                <button type="button" data-action="prev">Back</button>
+                <button type="button" data-action="next">Next</button>
+                <button type="submit" data-action="submit">Submit</button>
+            </div>
+        </form>
+    <script src="index.js"></script>
+</body>
+</html>
