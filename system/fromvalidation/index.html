@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forma Validatino</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <form id="form" novalidate>
+
+        <!-- EMAIL -->
+     <div class="form-group">
+        <label for="">Email</label>
+        <input type="text" data-field="email" class="emil"/>
+        <small class="error" data-error="email"></small>
+     </div>
+    
+     <!-- PASSWORD -->
+      <div class="form-gorup">
+        <label>Password</label>
+        <input type="password" data-field="password" />
+        <small class="error" data-error="password"></small>
+      </div>
+
+      <button type="submit">Sign Up</button>
+      
+    </form>
+
+    <div tabindex="0">Click me, then click somewhere else</div>
+    <div class="focusable">haaa</div>
+    <script src="index.js"></script>
+</body>
+</html>

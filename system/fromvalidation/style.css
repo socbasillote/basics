@@ -1,0 +1,9 @@
+.error {
+    color: red;
+    font-size: 12px;
+    height: 14px;
+}
+
+input.invalid {
+    border: 1px solid red;
+}
