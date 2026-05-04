@@ -1,0 +1,32 @@
+#componentlist {
+    width: 60%;
+    margin: 0 auto;
+}
+#listForm{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 auto;
+}
+
+#list{
+    padding-left: 0px;
+}
+.h4s{
+    color:rgb(24, 24, 24);
+}
+
+.addColor{
+    color: bisque;
+}
+
+li{
+    list-style: none;
+    background-color: aliceblue;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.itemAdd{
+background-color: #bbbbbb;
+}
