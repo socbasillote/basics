@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Components</title>
+</head>
+<body>
+    <h1>Components</h1>
+    
+    <!-- TABS -->
+<div id="tabs">
+  <button data-tab="1">Tab 1</button>
+  <button data-tab="2">Tab 2</button>
+
+  <div data-panel="1">Content 1</div>
+  <div data-panel="2">Content 2</div>
+</div>
+
+<!-- MODAL -->
+<button data-modal-open="#modal1">Open Modal</button>
+
+<div id="modal1" class="modal">
+  <div class="overlay" data-modal-close></div>
+  <div class="content">
+    <button data-modal-close>X</button>
+    Modal Content
+  </div>
+</div>
+
+<!-- DROPDOWN -->
+<div id="dropdown">
+  <button data-dropdown-trigger>Menu</button>
+  <ul data-dropdown-menu>
+    <li>Item 1</li>
+    <li>Item 2</li>
+  </ul>
+</div>
+
+      <script type="module" src="index.js"></script>
+</body>
+</html>

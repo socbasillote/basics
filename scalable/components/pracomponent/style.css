@@ -1,0 +1,11 @@
+.hidden{
+    display: none;
+}
+
+.test{
+    display: none;
+}
+
+.active{
+    display: block;
+}

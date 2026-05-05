@@ -1,0 +1,42 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.tabs {
+  max-width: 500px;
+  margin: auto;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.tab-buttons button {
+  padding: 10px 15px;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.tab-buttons button.active {
+  background: #007bff;
+  color: white;
+}
+
+.tab-panels {
+  margin-top: 20px;
+}
+
+.panel {
+  display: none;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.panel.active {
+  display: block;
+}
