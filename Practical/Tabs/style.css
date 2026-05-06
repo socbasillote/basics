@@ -1,0 +1,22 @@
+.btn {
+    padding: 8px 15px;
+    cursor: pointer;
+    border: 2px solid rgb(211, 211, 211);
+    border-radius: 5px;
+}
+.btn.active {
+    background-color: blue;
+    color: white;
+}
+
+.panel{
+    margin-top: 10px;
+    padding: 10px 15px;
+    width: 400px;
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 5px;
+    display: none;
+}
+.panel.open{
+    display: block;
+}

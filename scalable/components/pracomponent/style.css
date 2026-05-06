@@ -9,3 +9,11 @@
 .active{
     display: block;
 }
+
+.bgbtn{
+    background-color: rgb(59, 59, 255);
+    color: white;
+    border-color: white;
+    padding: 5px;
+    cursor: pointer;
+}
