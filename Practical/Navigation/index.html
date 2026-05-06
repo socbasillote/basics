@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Navigation</h1>
+
+    <div id="nav">
+        <nav class="nav">
+            <div class="logo">Nav</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+
+                <li class="dropdown">
+                    <a href="#">Services</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#webdesign">Web Design</a></li>
+                        <li><a href="#development">Development</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </div>
+
+
+    
+    <div class="pop">Show me</div>
+    <button>Popup</button>
+    <script>
+  const button = document.querySelector('button');
+  const pop = document.querySelector('.pop');
+
+  function positionPopup() {
+    const rect = button.getBoundingClientRect();
+
+    pop.style.left =
+      rect.left + window.scrollX + rect.width / 2 - pop.offsetWidth / 2 + "px";
+
+    pop.style.top =
+      rect.top + window.scrollY - pop.offsetHeight - 10 + "px";
+  }
+
+  button.addEventListener("click", () => {
+    pop.classList.toggle('active');
+    positionPopup();
+  });
+
+  // Make it "follow"
+  window.addEventListener('scroll', positionPopup);
+  window.addEventListener('resize', positionPopup);
+</script>
+</body>
+</html>
