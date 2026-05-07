@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <style>
+        canvas{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Canvas</h1>
+    <p>Draw a 250px width line in the center</p>
+    <canvas id="myCanvas" width="500" height="500">
+
+    </canvas>
+
+    <script>
+        const canvas = document.getElementById("myCanvas");
+
+        // get the 2d drawing context
+        const ctx = canvas.getContext("2d");
+        
+     /*   // House
+
+     
+     // filled box
+        ctx.fillStyle = "orange";
+        ctx.fillRect(50, 200, 200, 100);
+
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(210, 240, 30, 50);
+
+        ctx.moveTo(50, 200);
+        ctx.lineTo(150, 100);
+        ctx.lineTo(250, 200);
+        ctx.closePath();
+        ctx.stroke();
+
+        ctx.fillStyle = "black";
+        ctx.fillRect(215, 270, 5, 5);
+         */
+
+        
+
+    </script>
+</body>
+</html>
