@@ -43,3 +43,11 @@ body {
     padding: 6px;
     cursor: pointer;
 }
+.task-list {
+    min-height: 50px;
+    padding: 4px;
+}
+
+.task.draggig {
+    opacity: 0.5;
+}

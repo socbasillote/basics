@@ -18,7 +18,7 @@ function generateId() {
 
 export function addTask(columnId, content) {
     const newId = generateId();
-    
+
     state.tasks[newId] = {
         id: newId,
         content
@@ -26,4 +26,22 @@ export function addTask(columnId, content) {
 
     const column = state.columns.find(col => col.id === columnId);
     column.taskIds.push(newId);
+}
+
+export function moveTask(taskId, sourceColId, targetColdId) {
+    if (sourceColId === targetColdId) return;
+
+    const sourceCol = state.columns.find(c => c.id === sourceColId);
+    const targetCol = state.columns.find(c => c.id === targetColdId);
+
+    // remove from source
+    sourceCol.taskIds = sourceCol.taskIds.filter(id => id !== taskId);
+
+    // add to target
+    targetCol.taskIds.push(taskId);
+}
+
+export function reorderTasks(columnId, newTaskIds) {
+    const column = state.columns.find(c => c.id === columnId);
+    column.taskIds = newTaskIds;
 }

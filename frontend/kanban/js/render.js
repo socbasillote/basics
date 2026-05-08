@@ -1,3 +1,6 @@
+import { handleDrop } from "./dragdrop.js";
+import { getDragAfterElement } from "./utils.js";
+
 export function renderBoard(state) {
     const board = document.getElementById("board");
     board.innerHTML = "";
@@ -18,6 +21,38 @@ function createColumn(column, tasks) {
 
   const taskList = document.createElement("div");
   taskList.className = "task-list";
+
+  // allow drop
+  taskList.addEventListener("dragover", (e) => {
+    e.preventDefault();
+
+    const afterElement = getDragAfterElement(taskList, e.clientY);
+    const draggingEl = document.querySelector(".dragging");
+
+    if (!draggingEl) return;
+
+    if (afterElement == null) {
+        taskList.appendChild(draggingEl);
+    } else {
+        taskList.insertBefore(draggingEl, afterElement);
+    }
+  });
+
+
+  taskList.addEventListener('drop', (e) => {
+    e.preventDefault();
+
+    const taskId = e.dataTransfer.getData("taskId");
+    const sourceColId = e.dataTransfer.getData("sourceColId");
+    const targetColId = column.id;
+
+    // new order from DOM
+    const newTaskIds = [
+        ...taskList.querySelectorAll(".task")
+    ].map(el => el.dataset.id);
+
+    handleDrop(taskId, sourceColId, targetColId, newTaskIds);
+  });
 
   column.taskIds.forEach(taskId => {
     const task = tasks[taskId];
@@ -51,5 +86,19 @@ function createTask(task) {
 
     el.textContent = task.content;
 
+    el.addEventListener("dragstart", (e) => {
+  el.classList.add("dragging");
+
+  e.dataTransfer.setData("taskId", task.id);
+
+  const columnEl = el.closest(".column");
+  e.dataTransfer.setData("sourceColId", columnEl.dataset.id);
+});
+
+el.addEventListener("dragend", () => {
+  el.classList.remove("dragging");
+});
+
     return el;
 }
+
