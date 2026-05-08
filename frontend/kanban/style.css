@@ -1,0 +1,45 @@
+/* styles.css */
+* {
+        box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#board {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+}
+
+.column {
+  background: #f4f5f7;
+  padding: 10px;
+  border-radius: 8px;
+  width: 250px;
+
+}
+
+.task {
+  background: white;
+  padding: 8px;
+  margin-top: 8px;
+  border-radius: 6px;
+  cursor: grab;
+}
+
+.task-input {
+    width: 100%;
+    margin-top: 8px;
+    padding: 6px;
+
+}
+
+.add-task-btn {
+    width: 100%;
+    margin-top: 4px;
+    padding: 6px;
+    cursor: pointer;
+}
