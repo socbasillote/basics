@@ -1,4 +1,7 @@
-export const state = {
+import { loadState, saveState } from "./utils.js";
+import { renderBoard } from "./render.js";
+
+const defaultState = {
     columns: [
         {id: "col-1", title: "To Do", taskIds: ["task-1", "task-2"] },
         {id: "col-2", title: "In Progress", taskIds: [] },
@@ -10,6 +13,7 @@ export const state = {
     }
 };
 
+export let state = loadState() || defaultState;
 
 // Simple Id generator
 function generateId() {
@@ -17,7 +21,7 @@ function generateId() {
 }
 
 export function addTask(columnId, content) {
-    const newId = generateId();
+    const newId = "task-" + Date.now();
 
     state.tasks[newId] = {
         id: newId,
@@ -26,6 +30,8 @@ export function addTask(columnId, content) {
 
     const column = state.columns.find(col => col.id === columnId);
     column.taskIds.push(newId);
+
+    commit();
 }
 
 export function moveTask(taskId, sourceColId, targetColdId) {
@@ -39,9 +45,18 @@ export function moveTask(taskId, sourceColId, targetColdId) {
 
     // add to target
     targetCol.taskIds.push(taskId);
+
+    commit();
 }
 
 export function reorderTasks(columnId, newTaskIds) {
     const column = state.columns.find(c => c.id === columnId);
     column.taskIds = newTaskIds;
+
+    commit();
+}
+
+function commit() {
+    saveState(state);
+    renderBoard(state);
 }

@@ -10,4 +10,4 @@ export function handleDrop(taskId, sourceColId, targetColId, newTaskIds) {
     reorderTasks(targetColId, newTaskIds);
 
     renderBoard(state);
-}
+}  

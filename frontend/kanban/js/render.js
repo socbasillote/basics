@@ -89,7 +89,7 @@ function createTask(task) {
     el.addEventListener("dragstart", (e) => {
   el.classList.add("dragging");
 
-  e.dataTransfer.setData("taskId", task.id);
+  e.dataTransfer.setData("taskId", task.id );
 
   const columnEl = el.closest(".column");
   e.dataTransfer.setData("sourceColId", columnEl.dataset.id);
