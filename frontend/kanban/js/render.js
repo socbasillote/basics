@@ -84,20 +84,37 @@ function createTask(task) {
     el.draggable = true;
     el.dataset.id = task.id;
 
-    el.textContent = task.content;
+    
+
+    //el.textContent = task.content;
+
+    // content
+    const text = document.createElement("span");
+    text.className = "task-text";
+    text.dataset.id = task.id;
+    text.textContent = task.content;
+
+    // delete button
+    const delBtn = document.createElement("button");
+    delBtn.className = "delete-task-btn";
+    delBtn.dataset.id = task.id;
+    delBtn.textContent = "X";
+
+    el.appendChild(text);
+    el.appendChild(delBtn);
 
     el.addEventListener("dragstart", (e) => {
-  el.classList.add("dragging");
+      el.classList.add("dragging");
 
-  e.dataTransfer.setData("taskId", task.id );
+      e.dataTransfer.setData("taskId", task.id );
 
-  const columnEl = el.closest(".column");
-  e.dataTransfer.setData("sourceColId", columnEl.dataset.id);
-});
+      const columnEl = el.closest(".column");
+      e.dataTransfer.setData("sourceColId", columnEl.dataset.id);
+    });
 
-el.addEventListener("dragend", () => {
-  el.classList.remove("dragging");
-});
+    el.addEventListener("dragend", () => {
+      el.classList.remove("dragging");
+    });
 
     return el;
 }

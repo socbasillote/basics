@@ -60,3 +60,23 @@ function commit() {
     saveState(state);
     renderBoard(state);
 }
+
+export function deleteTask(taskId) {
+    // remove from task map
+    delete state.tasks[taskId];
+
+    // remove from all columns
+    state.columns.forEach(column => {
+        column.taskIds = column.taskIds.filter(id => id !== taskId);
+    });
+
+    commit();
+}
+
+export function updateTask(taskId, content) {
+    if (!state.tasks[taskId]) return;
+
+    state.tasks[taskId].content = content;
+
+    commit();
+}

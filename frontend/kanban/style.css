@@ -28,6 +28,16 @@ body {
   margin-top: 8px;
   border-radius: 6px;
   cursor: grab;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.task-text{
+  flex: 1;
 }
 
 .task-input {
@@ -50,4 +60,15 @@ body {
 
 .task.draggig {
     opacity: 0.5;
+}
+
+.delete-task-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-input {
+  width: 100%;
 }
