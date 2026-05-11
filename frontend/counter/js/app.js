@@ -1,4 +1,14 @@
 import { getHighest, getLowest, getTotal } from "./computedState.js";
+import { reducer } from "./reducer.js"
+import { generateId } from "./utils.js";
+
+const ACTIONS = {
+    ADD_COUNTER: "ADD_COUNTER",
+    INCREMENT: "INCREMENT",
+    DECREMENT: "DECREMENT",
+    RESET: "RESET",
+    UNDO: "UNDO"
+}
 
 const initialState = {
     counters: [],
@@ -12,12 +22,8 @@ const state = savedState
     ? JSON.parse(savedState)
     : initialState;
 
-function generateId() {
-    return Date.now() + Math.random();
-}
 
-function setState(updater){
-    const newState = updater(state);
+function setState(newState){
 
     Object.assign(state, newState);
 
@@ -29,137 +35,19 @@ function setState(updater){
     render();
 }
 
-function addCounter() {
-    setState((currentState) => {
+function dispatch(action) {
+    const newState = reducer(state, action, ACTIONS);
 
-        const newCounter = {
-            id: generateId(),
-            value: 0
-        };
-        
-        return {
-            counters: [
-                ...currentState.counters,
-                newCounter
-            ],
-
-            past: [
-                ...currentState.past,
-                createSnapshot()
-            ],
-
-            history: [
-                createHistoryEntry("Added new counter"),
-                ...currentState.history
-            ]
-        };
-    });
-    console.log(state);
+    setState(newState);
 }
 
-function updateCounter(id, change) {
 
-    setState((currentState) => {
-
-        const actionText = 
-            change > 0
-                ? "Incremented"
-                : "Decremented";
-
-        return {
-            counters: currentState.counters.map(counter => {
-
-                if (counter.id !== id) {
-                    return counter;
-                }
-
-                return {
-                    ...counter,
-                    value: counter.value + change
-                };
-            }),
-
-            past: [
-                ...currentState.past,
-                createSnapshot()
-            ],
-
-            history: [
-                createHistoryEntry(
-                    `${actionText} counter ${id}`
-                ),
-                ...currentState.history
-            ]
-        };
-    });
-}
-
-function resetCounter(id) {
-    setState((currentState) => {
-        return {
-            counters: currentState.counters.map(counter => {
-
-                if (counter.id !== id) {
-                    return counter;
-                }
-
-                return {
-                    ...counter,
-                    value: 0
-                };
-
-            }),
-
-            past: [
-                ...currentState.past,
-                createSnapshot()
-            ],
-
-            history: [
-                createHistoryEntry(
-                    `Reset counter ${id}`
-                ),
-                ...currentState.history
-            ]
-        };
-    });
-}
-
-function createHistoryEntry(message) {
-    return {
-        id: generateId(),
-        message,
-        timestamp: new Date().toLocaleDateString()
-    };
-}
-
-function createSnapshot() {
+export function createSnapshot() {
     return {
         counters: structuredClone(state.counters)
     };
 }
 
-function undo(){
-    if (state.past.length === 0) {
-        return;
-    }
-
-    const previousState = state.past[state.past.length - 1];
-
-    setState((currentState) => {
-
-        return {
-            counters: previousState.counters,
-
-            past: currentState.past.slice(0, -1),
-
-            history: [
-                createHistoryEntry("Undo action"),
-                ...currentState.history
-            ]
-        };
-    });
-}
 
 function render() {
     const counterList = document.getElementById("counter-list");
@@ -233,13 +121,32 @@ document
 
         switch (action) {
             case "increment":
-                updateCounter(id, 1);
+                
+                dispatch({
+                    type: ACTIONS.INCREMENT,
+                    payload: { id }
+                });
+
                 break;
+
+
             case "decrement":
-                updateCounter(id, -1);
+                
+                dispatch({
+                    type: ACTIONS.DECREMENT,
+                    payload: { id }
+                });
+                
                 break;
+
+
             case "reset":
-                resetCounter(id);
+                
+                dispatch({
+                    type: ACTIONS.RESET,
+                    payload: { id }
+                });
+
                 break;
         }
     });
@@ -247,11 +154,21 @@ document
 
     document
         .getElementById("add-counter-btn")
-        .addEventListener("click", addCounter);
+        .addEventListener("click", () => {
+
+            dispatch({
+                type: ACTIONS.ADD_COUNTER
+            });
+        });
 
     document
         .getElementById("undo-btn")
-        .addEventListener("click", undo);
+        .addEventListener("click", () => {
+
+            dispatch({
+                type: ACTIONS.UNDO
+            });
+        });
 
 
 render();
