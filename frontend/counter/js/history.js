@@ -7,9 +7,3 @@ export function createHistoryEntry(message) {
         timestamp: new Date().toLocaleDateString()
     };
 }
-
-export function createSnapshot(state) {
-    return {
-        counters: structuredClone(state.counters)
-    };
-}
