@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <div class="app">
+        
+        <header class="header">
+            <h1>Todo App</h1>
+            
+            <button id="themeToggle">
+                Toggle Theme
+            </button>
+        </header>
+
+        <!-- Todo Form -->
+         <form action="" id="todoForm" class="todo-form">
+            <input 
+                type="text" 
+                id="todoInput" 
+                placeholder="Add Todo..." 
+                required 
+            />
+
+            <input type="date" id="dueDate" />
+
+            <select id="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+
+            <input 
+                type="text"
+                id="category"
+                placeholder="Category"
+            />
+
+            <button type="submit">
+                Add
+            </button>
+         </form>
+
+         <!-- Search -->
+
+         <input 
+            type="text"
+            id="searchInput"
+            placeholder="Search todos..."
+         />
+
+         <!-- Filters -->
+          <div class="filters">
+            <button data-filter="all">All</button>
+            <button data-filter="active">Active</button>
+            <button data-filter="completed">Completed</button>
+          </div>
+
+          <!-- Bulk Actions -->
+          <div class="bulk-actions">
+            <button id="completeAll">
+                Complete All
+            </button>
+
+            <button id="deleteCompleted">
+                Delete Completed
+            </button>
+          </div>
+
+          <!-- Todo List -->
+          <ul id="todoList"></ul>
+
+          <!-- Empty State -->
+          <div id="emptyState" class="empty-state">
+            No Todos found.
+          </div>
+
+          <!-- Toast -->
+           <div id="toast"></div>
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
