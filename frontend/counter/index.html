@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="app">
+        
+        <header>
+            <h1>Counter Dashboard</h1>
+            
+            <button id="add-counter-btn">
+                Add Counter
+            </button>
+        </header>
+
+        <section class="stats">
+            <div>Total: <span id="total-value">0</span></div>
+            <div>Highest: <span id="highest-value">0</span></div>
+            <div>Lowest: <span id="lowest-value">0</span></div>
+        </section>
+
+        <section id="counter-list" class="counter-list"></section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
