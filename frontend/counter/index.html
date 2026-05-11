@@ -17,6 +17,10 @@
             <button id="add-counter-btn">
                 Add Counter
             </button>
+
+            <button id="undo-btn">
+                Undo
+            </button>
         </header>
 
         <section class="stats">
@@ -24,10 +28,16 @@
             <div>Highest: <span id="highest-value">0</span></div>
             <div>Lowest: <span id="lowest-value">0</span></div>
         </section>
+        
 
         <section id="counter-list" class="counter-list"></section>
+
+        <section class="history-section">
+            <h2>History</h2>
+            <div id="history-list"></div>
+        </section>
     </div>
 
-    <script src="app.js"></script>
+    <script type="module" src="./js/app.js"></script>
 </body>
 </html>
