@@ -13,7 +13,7 @@ export function subscribe(listener) {
     listeners.push(listener);
 }
 
-export function setState(updated) {
+export function setState(updater) {
     updater(state);
 
     listeners.forEach(listener => listener(state));
