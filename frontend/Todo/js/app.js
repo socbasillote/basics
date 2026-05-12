@@ -1,23 +1,32 @@
 import { state, setState, subscribe } from "./state.js";
 import { render } from "./render.js";
 
-import { saveState, loadState } from "./storage.js";
+//import { saveState, loadState } from "./storage.js";
+import { initDB, saveTodos, loadTodos } from "./db.js";
 import { addTodo, deleteTodo, toggleTodo, editTodo, undoDelete } from "./handlers.js";
 
 import { setupDragAndDrop } from "./drag.js";
 
 /* ====== LOAD STATE ====== */
-const saved = loadState();
+//const saved = loadState();
 
-if (saved) {
-    Object.assign(state, saved);
+/* ====== INIT DB ====== */
+await initDB();
+const todos = await loadTodos();
+
+if (todos) {
+    state.todos = todos;
+}
+
+if (todos) {
+    Object.assign(state, todos);
 }
 
 
 /* ======= SUBSCRIBE ======= */
 subscribe(() => {
     render();
-    saveState(state);
+    saveTodos(state.todos);
 })
 
 

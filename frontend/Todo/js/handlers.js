@@ -58,7 +58,6 @@ export function toggleTodo(id) {
 
         todo.completed = !todo.completed;
     });
-    console.log('toggled')
 }
 
 export function editTodo(id) {
