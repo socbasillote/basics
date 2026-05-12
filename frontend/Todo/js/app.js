@@ -92,6 +92,7 @@ todoList.addEventListener("click", e => {
 
     if (e.target.classList.contains("toggle")) {
         toggleTodo(id);
+        console.log('toggle')
     }
 });
 

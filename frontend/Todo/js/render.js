@@ -32,7 +32,7 @@ function renderTodos() {
         todos = todos.filter(todo => 
             todo.title
                 .toLowerCase()
-                .includes(state.search.toLocaleLowerCase())
+                .includes(state.search.toLowerCase())
         );
     };
 
@@ -58,11 +58,11 @@ function renderTodos() {
         li.dataset.id = todo.id;
 
         li.innerHTML = `
-            <div class="todo-left>
+            <div class="todo-left">
                 
                 <input 
                     type="checkbox"
-                    class="toggle
+                    class="toggle"
                     ${todo.completed ? "checked" : ""}
                 />
 
@@ -76,6 +76,7 @@ function renderTodos() {
                         ${todo.dueDate || ""}
                     </small>
                 </div>
+                
             </div>
 
             <div>
