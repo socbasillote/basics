@@ -1,76 +1,94 @@
 
-const state = [
-    {id: 1, title: "Sample"},
-    {id: 2, title: "Sample2"},
-    {id: 3, title: "Sample3"},
-]
 
-const list = document.getElementById("list");
-const inputs = document.querySelector(".inputs")
-const btn = document.querySelector('.btn');
-const deleteBtn = document.querySelector(".deleteBtn");
+const state = {
+    todos: []
+}
 
-function setState(updater) {
-    const newState = updater(state);
+const list = document.getElementById('list');
+const inputs = document.getElementById('add-todo')
 
-    state.length = 0;
-    state.push(...newState);
+function render(){
+    list.innerHTML = "";
+
+    state.todos.forEach(t => {
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+            <span>${t.text}</span>
+            <button data-id="${t.id}" class="updateBtn">Update</button>
+
+            <button data-id="${t.id}" class="deleteBtn">Delete</button>
+           
+        `;
+
+        list.appendChild(li);
+    });
+    console.log('render')
+}
+
+function addTodo(text){
+
+    const addList = {
+        id: state.todos.length + 1,
+        text
+    };
+
+
+    state.todos.push(addList)
+    render();
+}
+
+function updateTodo(ids, newText) {
+
+    state.todos = state.todos.map((t) => {
+        if (t.id == ids) {
+            return {
+                ...t,
+                text: newText,
+            }
+        }
+
+        return t;
+    })
 
     render();
 }
 
-function render(){
+function deleteTodo(ids) {
+
+    state.todos = state.todos.filter((t) => t.id != ids);
+    console.log(state.todos);
+    render();
+}
+
+const addBtn = document.getElementById('addBtn');
+
+
+addBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const text = inputs.value.trim();
+    addTodo(text);
     
-
-    list.innerHTML = state.map(li => {
-        return `
-            <li data-id="${li.id}">
-                <span>${li.title}</span>
-                <button class="deleteBtn">Delete</button>
-            </li>`
-    }).join("");
-
-    console.log(state);
-
-
-}
-
-function addList(data){
-    const ids = state.length + 1;
-    setState((currentState) => {
-        return [
-            ...currentState,
-            {
-                id: ids,
-                title: data
-            }
-        ]
-    });
-}
-
-function deleteList(id) {
-    setState((currentState) => {
-        return currentState.filter(item => item.id !== id);
-    })
-}
-
-btn.addEventListener('click', () => {
-
-        addList(inputs.value);
-        inputs.value = "";
-
+    console.log(text)
+    inputs.value = '';
 })
 
 
 
-
-render();
-
-document.addEventListener("click", (e) => {
-    if(e.target.classList.contains("deleteBtn")) {
-        const li = e.target.closest('[data-id]');
-        const id = Number(li.dataset.id);
-
-        deleteList(id);
+list.addEventListener("click", (e) => {
+    const id = e.target.dataset.id;
+    
+    if (e.target.classList.contains('deleteBtn')){
+        deleteTodo(id);
     }
+
+    // update
+    if (e.target.classList.contains('updateBtn')) {
+        const newText = prompt("Edit todo:");
+
+        if (newText) {
+            updateTodo(id, newText);
+        }
+    }
+    
 })
