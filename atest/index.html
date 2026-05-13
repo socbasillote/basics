@@ -1,35 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Todo List</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stateful</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  
   <div class="app">
-    <h1>Todo List</h1>
+    <h1>States</h1>
 
-    <div class="input-group">
-      <input type="text" id="todo-input" placeholder="Add a new todo..." />
-      <button id="add-btn">Add</button>
+    <h3 id="count">0</h3>
+    <div>
+      <button id="addBtn">Increment</button>
+      <button id="decrementBtn">Decrement</button>
     </div>
 
-    <div class="filters">
-      <button data-filter="all" class="active">All</button>
-      <button data-filter="active">Active</button>
-      <button data-filter="completed">Completed</button>
-    </div>
-
-    <ul id="todo-list"></ul>
-
-    <div id="placeholder" class="placeholder">Create Todo</div>
-
-    <div class="footer">
-      <span id="count">0 items</span>
-    </div>
+    <div id="comp">0</div>
   </div>
-
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

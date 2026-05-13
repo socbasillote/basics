@@ -14,7 +14,7 @@ export function getCartTotals() {
     if (coupon === 'SAVE10') {
         discount = subtotal * 0.1;
     }
-
+    console.log(coupon);
     const total = subtotal + tax - discount;
 
     return {

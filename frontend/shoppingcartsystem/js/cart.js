@@ -87,9 +87,14 @@ export function updateQuantity(productId, amount) {
 }
 
 export function renderCart() {
+  const cartSideBar = document.getElementById('cartSidebar')
+  const cartButton = document.getElementById('cartButton')
   const cartItems = document.getElementById('cartItems');
   const badge = document.getElementById('cartBadge');
   const summary = document.getElementById('checkoutSummary');
+
+  const applyCouponBtn = document.getElementById('applyCouponBtn');
+  const couponInput = document.getElementById('couponInput')
 
   const state = store.getState();
 
@@ -143,4 +148,19 @@ export function renderCart() {
       removeFromCart(Number(button.dataset.id));
     });
   });
+
+  document.querySelector('.closeCart').addEventListener('click', () => {
+    cartSideBar.classList.add('hidden')
+    console.log('remove')
+  })
+
+  cartButton.addEventListener('click', () => {
+      cartSideBar.classList.remove('hidden');
+
+  })
+
+  applyCouponBtn.addEventListener('click', () => {
+    store.setState({coupon: couponInput.value})
+    console.log(state.coupon);
+  })
 }
