@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart System</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+
+<header>
+  <h1>Shop</h1>
+
+  <div class="search-sort">
+    <input type="text" id="searchInput" placeholder="Search products">
+
+    <select id="sortSelect">
+      <option value="default">Sort</option>
+      <option value="price-asc">Price Low to High</option>
+      <option value="price-desc">Price High to Low</option>
+      <option value="name">Name</option>
+    </select>
+  </div>
+
+  <button id="cartButton">
+    Cart <span id="cartBadge">0</span>
+  </button>
+</header>
+
+<main>
+  <aside class="filters">
+    <h3>Categories</h3>
+    <div id="categoryFilters"></div>
+  </aside>
+
+  <section>
+    <div id="loadingState"></div>
+    <div id="errorState"></div>
+
+    <div id="productGrid" class="product-grid"></div>
+  </section>
+</main>
+
+<div id="cartSidebar" class="cart-sidebar hidden">
+  <h2>Cart</h2>
+
+  <div id="cartItems"></div>
+
+  <div class="coupon-area">
+    <input type="text" id="couponInput" placeholder="Coupon code">
+    <button id="applyCouponBtn">Apply</button>
+  </div>
+
+  <div id="checkoutSummary"></div>
+
+  <button id="checkoutBtn">Checkout</button>
+</div>
+
+<div id="productModal" class="modal hidden"></div>
+
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
