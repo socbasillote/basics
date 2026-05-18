@@ -88,10 +88,101 @@ todos.push(createTodo('secondTitle'));
 console.log(todos); */
 
 // 6. Event Listener
-const app = document.getElementById('app');
+const state = {
+    count : 0
+}
+let user = [
+    {id: 0, name: 'test'},
+    {id: 1, name: 'hehehe'},
+    {id: 2, name: 'hahaha'}
+]
 
-app.addEventListener('click', () => {
-    console.log('click')
+const app = document.getElementById('app');
+const input = document.querySelector('input')
+const count = document.getElementById('count');
+const lists = document.getElementById('lists');
+const updateBtn = document.getElementById('updateBtn');
+const addBtn = document.getElementById('addBtn');
+
+function render(){
+    count.textContent = state.count;
+    lists.innerHTML = "";
+    user.sort((a, b) => b.id - a.id);
+    user.map(u => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${u.name}</span> <button id="deleteBtn">Delete</button> <button id="updateBtn">update</button>`
+        li.dataset.id = u.id;
+     //   console.log(li.dataset.id)
+        lists.appendChild(li);
+    })
+
+    
+}
+
+function addList(){
+    const newInput = input.value;
+    const rand = Math.floor(Math.random() * 10);
+    const newList = {
+        id: user.length + 1,
+        name: `${newInput} ${rand}`,
+    }
+
+    user.push(newList);
+    input.value = "";
+}
+
+function updateList(id){
+    let pvalue = prompt('Todo update', "");
+    
+    user.map(u => u.id == id ? u.name = pvalue : user);
+  
+  render();
+}
+
+function deleteList(id){
+    console.log(id);
+    user = user.filter(u => u.id != id );
+    
+}
+
+app.addEventListener('click', (e) => {
+    state.count++;
+    const addBtn = e.target.closest('#addBtn');
+    const updateBtn = e.target.closest("#updateBtn");
+    const deleteBtn = e.target.closest('#deleteBtn')
+    const id = e.target.closest('[data-id]')
+
+    
+    if(deleteBtn){
+        
+        deleteList(id.dataset.id);
+
+    }
+    if (updateBtn) {
+        updateList(id.dataset.id);
+    }
+    
+
+    
+    if (addBtn) {
+        addList();
+    }
+
+
+    render();
 })
+
+
+input.addEventListener('input', (e) => {
+   const value = e.target.value
+   
+   console.log(value);
+   
+})
+
+
+render();
+
+
 
 
