@@ -90,11 +90,7 @@ function completeTodo(id) {
    render();
 }
 
-function activeTodo(){
-    
-    todos = todos.filter(t => t.status == 'active');
-    render();
-}
+
 
 function completeTodos(){
     
