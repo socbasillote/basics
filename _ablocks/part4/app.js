@@ -9,6 +9,13 @@ let state = [
     {id: 1, title: 'test', status: 'active'}
 ];
 
+let goodState = {
+    todo: {
+        1: {id: 3, name: 'hello'},
+        2: {id: 4, name: 'hi'}
+    }
+}
+
 let editId = null;
 
 function render(){
