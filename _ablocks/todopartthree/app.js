@@ -5,6 +5,7 @@ const addBtn = document.getElementById('addBtn');
 
 let state = [
     {id: 1, title: 'test', status: 'active'}
+
 ]
 
 let editId = null;
@@ -17,13 +18,30 @@ function render(){
     })
 }
 
+function addTodo(){
+    const newTodoTitle = addInput.value;
+    const newId = Date.now();
+
+    const newTodo = {
+        id: newId,
+        title: newTodoTitle,
+        status: 'active'
+    };
+
+    state.push(newTodo);
+
+    render();
+    addInput.value = '';
+}
+
+
 function createTodo(state){
     const li = document.createElement('li');
 
     li.dataset.id = state.id;
     li.classList.add('list');
 
-    console.log(`${state.id} | ${editId}`)
+    //console.log(`${state.id} | ${editId}`)
 
     if (editId == state.id) {
         li.innerHTML = `
@@ -48,25 +66,9 @@ function createTodo(state){
     lists.appendChild(li);
 }
 
-function addTodo(){
-    const newTodoTitle = addInput.value;
-    const newId = Date.now();
-
-    const newTodo = {
-        id: newId,
-        title: newTodoTitle,
-        status: 'active'
-    };
-
-    state.push(newTodo);
-
-    render();
-    addInput.value = '';
-}
 
 function deleteBtn(id){
     state = state.filter(todo => todo.id != id);
-    render();
 }
 
 function updateTodo(id){
@@ -75,7 +77,7 @@ function updateTodo(id){
 
 function saveUpdate(id, newTitle){
 
-    state.map(todo => {
+   state = state.map(todo => {
         if(todo.id == id){
             return {
                 ...todo,
@@ -89,10 +91,15 @@ function saveUpdate(id, newTitle){
     editId = null;
 }
 
+function cancelButton(){
+    editId = null;
+}
+
 app.addEventListener('click', (e) => {
 
     const li = e.target.closest('[data-id]');
     if (!li) return;
+
     const id = Number(li.dataset.id);
 
 
@@ -101,13 +108,17 @@ app.addEventListener('click', (e) => {
     }
 
     if(e.target.closest('.updateBtn')){
-        updateTodo(li.dataset.id);
+        updateTodo(id);
     }
 
     if(e.target.closest('.saveBtn')){
         const input = li.querySelector('.editInput');
         console.log(input);
         saveUpdate(id, input.value);
+    }
+
+    if(e.target.closest('.cancelBtn')){
+        cancelButton();
     }
     render();
 })
