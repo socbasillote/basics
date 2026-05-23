@@ -1,0 +1,21 @@
+#main {
+    display: flex;
+    justify-content: center;
+}
+
+#lists{
+    padding-left: 0px;
+}
+.list{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+    background-color: antiquewhite;
+    margin-bottom: 5px;
+    
+}
+
+.complete{
+    text-decoration: line-through;
+    color:darkgrey;
+}
