@@ -1,0 +1,38 @@
+
+.main{
+   height: 100vh;
+    display: flex;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    width: auto;
+}
+#lists{
+    padding-left: 5px;
+    width: 100%;
+}
+.list {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    background-color: antiquewhite;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    width: auto;
+}
+.deleteBtn {
+    background-color: rgb(236, 105, 105);
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.updateBtn {
+    background-color: rgb(122, 122, 122);
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+}
