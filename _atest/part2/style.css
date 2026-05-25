@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+}
+#app{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contentsUI{
+    background-color: rgb(253, 236, 216);
+    margin-top: 0;
+    padding: 10px 20px;
+    width: 60%;
+}
+
+.topContent{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addTodoContents{
+    display: flex;
+    gap: 10px;
+}
+
+.todoInput {
+width: 100%;
+  max-width: 400px;
+  padding: 14px 18px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  outline: none;
+  background: #ffffff;
+  color: #111827;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.todoInput::placeholder {
+  color: #9ca3af;
+}
+
+.todoInput:focus {
+  border-color: rgb(204, 138, 63);
+  box-shadow: 0 0 0 4px rgba(241, 191, 99, 0.2);
+  transform: translateY(-1px);
+}
+.todoAddBtn{
+    width: 100%;
+    max-width: 50px;
+    border-radius: 12px;
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    background-color: rgb(204, 138, 63);
+    color: white;
+    transition: all 0.25s ease;
+}
+.todoAddBtn:hover{
+    background-color: rgb(192, 126, 50);
+    transform: translateY(-1px);
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+}
+
+
+#lists{
+    padding-left: 0px;
+    
+}
+.list{
+    list-style: none;
+    background-color: rgb(255, 245, 233);;
+    padding: 15px 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+.list:hover{
+    background-color: rgb(253, 249, 244);
+}
+.listContent{
+    display: flex;
+    justify-content: space-between;
+}
