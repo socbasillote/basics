@@ -9,14 +9,29 @@ const todoCount = document.querySelector('.todoCount');
 let state = [];
 let editId = null;
 
+let filter = 'all';
+
 function render(){
     lists.innerHTML = '';
 
-    state.forEach(todo => {
+    let filteredTodos = state;
+
+    if(filter == 'active'){
+        filteredTodos = state.filter(todo => todo.status == 'active');
+    }
+
+    if (filter == 'complete') {
+        filteredTodos = state.filter(todo => todo.status == 'complete');
+
+        
+    }
+
+    filteredTodos.forEach(todo => {
         createTodo(todo);
     })
 
-    todoCount.textContent = `${state.length}`;
+    console.log('hello')
+    todoCount.textContent = `${filteredTodos.length}`;
 }
 
 function createTodo(todo){
@@ -116,10 +131,34 @@ function todoComplete(id){
     })
 }
 
+
+let listId = null
 app.addEventListener('click', (e) => {
-    const li = e.target.closest('[data-id]');
-    if (!li) return;
-    const listId = li.dataset.id;
+    
+    if (e.target.closest('.allBtn')){
+        filter = 'all';
+        console.log('all')
+    }
+
+    if(e.target.closest('.activeBtn')){
+        filter = 'active';
+        console.log('active')
+    }
+
+    if(e.target.closest('.completeTodoBtn')){
+        filter = 'complete'
+        console.log(filter)
+    }
+
+
+    if(e.target.closest('[data-id]')){
+        const li = e.target.closest('[data-id]');
+    
+        listId = li.dataset.id;
+    }
+    
+
+
     
     if (e.target.closest('.deleteBtn')) {
         deleteTodo(listId);
@@ -143,6 +182,8 @@ app.addEventListener('click', (e) => {
         console.log(state)
     }
 
+
+    console.log(state);
     render();
 })
 
