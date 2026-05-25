@@ -102,9 +102,9 @@ function completeStatus(id){
             }
             
             return {
-                    ...todo,
-                    status: 'active'
-                }
+                ...todo,
+                status: 'active'
+            }
         }
 
         return todo

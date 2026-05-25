@@ -1,0 +1,33 @@
+#app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.todoApp{
+    background-color: aliceblue;
+    padding: 10px 40px;
+    margin-top: 30px;
+    width: 50%;
+}
+
+.headerApp{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#lists{
+    padding: 0;
+}
+.list{
+    list-style: none;
+    padding: 10px 10px;
+    background-color: antiquewhite;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.listStyle{
+    display: flex;
+    justify-content: space-between;
+}
