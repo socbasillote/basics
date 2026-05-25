@@ -43,7 +43,7 @@ function createTodo(todo){
 
     li.innerHTML = `
         <div class="listStyle">
-            <span>${todo.title}</span>
+            <span class="todoText ${todo.status === 'complete' ? 'complete' : ''}">${todo.title}</span>
             <div>
                 <button class="updateBtn">Update</button>
                 <button class="deleteBtn">Delete</button>
@@ -97,6 +97,25 @@ function saveTodo(id, newTitle){
 function cancelBtn(){
     editId = null;
 }
+
+function todoComplete(id){
+    state = state.map(todo => {
+        if (todo.id === id){
+            if(todo.status != 'complete') {
+                return {
+                    ...todo,
+                    status: 'complete'
+                }
+            }
+            return {
+                ...todo,
+                status: 'active'
+            }
+        }
+        return todo
+    })
+}
+
 app.addEventListener('click', (e) => {
     const li = e.target.closest('[data-id]');
     if (!li) return;
@@ -118,6 +137,12 @@ app.addEventListener('click', (e) => {
     if (e.target.closest('.cancelBtn')) {
         cancelBtn();
     }
+
+    if(e.target.closest('.todoText')){
+        todoComplete(listId);
+        console.log(state)
+    }
+
     render();
 })
 

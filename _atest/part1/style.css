@@ -31,3 +31,12 @@
     display: flex;
     justify-content: space-between;
 }
+
+.complete {
+    text-decoration: line-through;
+    color: grey;
+}
+
+.filterBtn{
+    margin-top: 10px;
+}
