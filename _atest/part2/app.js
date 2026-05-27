@@ -54,6 +54,8 @@ function addTodo(){
     const newTitle = todoInput.value;
     const newId = crypto.randomUUID();
 
+    if(!newTitle) return;
+    
     const newTodo = {
         id: newId,
         title: newTitle,
@@ -97,7 +99,6 @@ app.addEventListener('click', (e) => {
     
     const listId = li.dataset.id;
 
-    
     if (e.target.closest('.deleteBtn')) {
         deleteTodo(listId);
     }
