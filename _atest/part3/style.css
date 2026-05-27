@@ -1,0 +1,13 @@
+body {
+    margin-top: 0px;
+}
+
+#app{
+    display: flex;
+    justify-content: center;
+}
+
+.completeTodo {
+    color:gray;
+    text-decoration: line-through;
+}
