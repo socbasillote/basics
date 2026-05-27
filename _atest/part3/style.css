@@ -1,13 +1,41 @@
 body {
-    margin-top: 0px;
+    margin: 0px;
 }
 
 #app{
     display: flex;
     justify-content: center;
 }
+.appContent{
+    background-color: antiquewhite;
+    padding: 30px 50px;
+    width: 60%;
+}
+#lists{
+    padding-left: 0px;
+}
+.list{
+    list-style: none;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: aliceblue;
+}
+.todolist{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.todolistEdit{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .completeTodo {
     color:gray;
     text-decoration: line-through;
+}
+
+.filterBtns{
+    margin-top: 10px;
 }

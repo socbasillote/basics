@@ -4,15 +4,33 @@ const lists = document.getElementById('lists');
 const todoInput = document.querySelector('.todoInput');
 const addTodoBtn = document.querySelector('.addTodoBtn');
 
-let state = [];
+const filterBtns = document.querySelector('.filterBtns');
+
+let storage = localStorage.getItem('state');
+let state = storage  ? JSON.parse(storage) : [];
+
+
 let editId = null;
+let filterText = 'all';
 
 function render(){
     lists.innerHTML = '';
+    localStorage.setItem('state', JSON.stringify(state));
 
-    state.forEach(todo => {
-        createTodo(todo);
-    })
+    let filteredTodo = state;
+
+    if(filterText == 'completed'){
+        filteredTodo = filteredTodo.filter(todo => todo.status == 'completed');
+        console.log(filteredTodo)
+    }
+
+    if(filterText == 'active'){
+        filteredTodo = filteredTodo.filter(todo => todo.status == 'active');
+    }
+
+    filteredTodo
+        .sort((a, b) => b.id - a.id)
+        .forEach(todo => {createTodo(todo); });
 }
 
 function createTodo(todo){
@@ -23,7 +41,7 @@ function createTodo(todo){
     
     if (editId === todo.id){
         li.innerHTML = `
-            <div>
+            <div class='todolistEdit'>
                 <input type='text' value="${todo.title}" class='editTodoInput' />
                 <div>
                     <button class="saveBtn">Save</button>
@@ -39,8 +57,8 @@ function createTodo(todo){
         return;
     }
     li.innerHTML = `
-        <div>
-            <span class="listTitle ${todo.status == 'complete' ? 'completeTodo' : ''}">${todo.title}</span>
+        <div class='todolist'>
+            <span class="listTitle ${todo.status == 'completed' ? 'completeTodo' : ''}">${todo.title}</span>
             <div>
                 <button class="updateBtn">Update</button>
                 <button class="deleteBtn">Delete</button>
@@ -53,7 +71,7 @@ function createTodo(todo){
 
 function addTodo(){
     const inputValue = todoInput.value;
-    const id = crypto.randomUUID();
+    const id = Date.now();
 
     const newTodo = {
         id,
@@ -98,10 +116,10 @@ function completedTodo(id){
     state = state.map(todo => {
 
         if(todo.id === id){
-            if(todo.status != 'complete') {
+            if(todo.status != 'completed') {
                 return {
                     ...todo,
-                    status: 'complete'
+                    status: 'completed'
                 }
             }
             return {
@@ -116,7 +134,7 @@ function completedTodo(id){
 app.addEventListener('click', (e) => {
     const list = e.target.closest('[data-id]');
     if (!list) return;
-    const id = list.dataset.id;
+    const id = Number(list.dataset.id);
     
     if (e.target.closest('.deleteBtn')){
         deleteTodo(id);
@@ -144,5 +162,22 @@ app.addEventListener('click', (e) => {
 })
 
 addTodoBtn.addEventListener('click', addTodo)
+
+filterBtns.addEventListener('click', (e) => {
+    if (e.target.closest('.allTodo')) {
+        filterText = 'all'
+        console.log('test')
+    }
+
+    if (e.target.closest('.activeTodo')){
+        filterText = 'active'
+        console.log('active')
+    }
+
+    if (e.target.closest(".completedTodo")) {
+        filterText = 'completed'
+    }
+    render();
+})
 
 render();
