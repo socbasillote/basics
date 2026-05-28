@@ -53,10 +53,8 @@ export function defaultCreateTodo(li, todo){
     const leftContent = document.createElement('div');
     leftContent.className = 'inputContent';
 
-    const checkBox = document.createElement('input');
-    checkBox.type = 'checkbox';
-    checkBox.checked = todo.status;
-    checkBox.className = 'checkBox';
+    const checkBox = document.createElement('i');
+    checkBox.className = `bi ${todo.status === true ? 'bi-check-circle' : 'bi-square'} checkBox`;
 
     const title =  document.createElement('span');
     title.className = `todoTitle ${todo.status ? 'completeTodo' : ''}`;

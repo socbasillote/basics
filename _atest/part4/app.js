@@ -125,4 +125,12 @@ app.addEventListener('click', (e) => {
 })
 
 
+app.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){
+        cancelTodo();
+    }
+    render();
+})
+
+
 todoAddBtn.addEventListener('click', addTodo);
