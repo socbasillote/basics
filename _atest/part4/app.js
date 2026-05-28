@@ -6,12 +6,26 @@ const lists = document.getElementById('lists');
 const todoInput = app.querySelector('.todoInput');
 const todoAddBtn = app.querySelector('.todoAddBtn');
 
+const filterButtons = document.querySelector('.filterButtons');
+
 let state = [];
+let filterTodo = 'all';
 let editTodoId = null;
+
 function render(){
     lists.innerHTML = '';
 
-    state.forEach(todo => {
+    let filterState = state;
+
+    if(filterTodo === 'active'){
+        filterState = filterState.filter(todo => todo.status === false);
+    }
+
+    if(filterTodo === 'completed'){
+        filterState = filterState.filter(todo => todo.status === true);
+    }
+
+    filterState.forEach(todo => {
         createTodo(todo);
     })
 }
@@ -82,15 +96,9 @@ function cancelTodo(){
 function completeTodo(id){
     state = state.map(todo => {
         if(todo.id === id){
-            if(todo.status !== true){
-                return {
-                    ...todo,
-                    status: true
-                }
-            }
             return {
                 ...todo,
-                status: false
+                status: !todo.status
             }
         }
         return todo
@@ -102,25 +110,38 @@ app.addEventListener('click', (e) => {
     if(!list) return;
     const id = list.dataset.id;
     
+    let shouldRender = false;
     if(e.target.closest('.deleteBtn')){
         deleteTodo(id);
-    }
-
-    if(e.target.closest('.todoTitle')){
-        updateTodo(id);
+        shouldRender = true;
     }
 
     if(e.target.closest('.saveBtn')){
         const newTitle = document.querySelector('.editInput');
         saveTodo(id, newTitle.value);
+        shouldRender = true;
     }
     if(e.target.closest('.cancelBtn')){
         cancelTodo();
+        shouldRender = true;
     }
     if(e.target.closest('.checkBox')){
         completeTodo(id);
         console.log(state);
+        shouldRender = true;
     }
+    if(shouldRender){
+        render();
+    }
+    
+})
+
+app.addEventListener('dblclick', (e) => {
+    const list = e.target.closest('[data-id]');
+    if(!list) return;
+    const id = list.dataset.id;
+    
+    updateTodo(id);
     render();
 })
 
@@ -128,9 +149,25 @@ app.addEventListener('click', (e) => {
 app.addEventListener('keydown', (e) => {
     if(e.key === 'Escape'){
         cancelTodo();
+        render();
     }
-    render();
 })
 
 
 todoAddBtn.addEventListener('click', addTodo);
+
+filterButtons.addEventListener('click', (e) => {
+    if(e.target.closest('.allBtn')){
+        filterTodo = 'all';
+    }
+
+    if(e.target.closest('.activeBtn')){
+        filterTodo = 'active';
+    }
+
+    if(e.target.closest('.completedBtn')){
+        filterTodo = 'completed';
+        console.log(filterTodo);
+    }
+    render();
+})
