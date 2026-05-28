@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+}
+
+
+.appContent{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.contentUI{
+    background-color: burlywood;
+    margin-top: 10px;
+    padding: 20px 40px;
+    width: 60%;
+}
+
+#lists{
+    padding-left: 0px;
+}
+.list{
+    list-style: none;
+    padding: 10px 15px;
+    background-color: aliceblue;
+    margin-bottom: 10px;
+}
+
+.todoList{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnActions{
+    display: flex;
+    gap: 5px;
+}
+
+input {
+    border-radius: 2px;
+
+}
+
+.editInput{
+    border: none;
+    border-bottom: 2px solid #555;
+    outline: none;
+    padding: 4px 4px;
+    font-size: 16px;
+    background: transparent;
+    width: 250px;
+    transform: border-color 0.3s ease;
+}
+
+.editInput:focus {
+    border-bottom-color: #b98e54;
+}
