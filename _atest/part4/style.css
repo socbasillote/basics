@@ -1,7 +1,9 @@
 body {
     margin: 0;
 }
-
+input, .todoTitle {
+    font-family: 'Courier New', Courier, monospace;
+}
 
 .appContent{
     display: flex;
@@ -24,11 +26,18 @@ body {
     padding: 10px 15px;
     background-color: aliceblue;
     margin-bottom: 10px;
+    font-size: 16px;
 }
 
 .todoList{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 28px;
+}
+
+.completeTodo{
+    color:#b6b6b6;
 }
 
 .btnActions{
@@ -36,9 +45,8 @@ body {
     gap: 5px;
 }
 
-input {
-    border-radius: 2px;
-
+.todoTitle {
+    font-size: 16px;
 }
 
 .editInput{

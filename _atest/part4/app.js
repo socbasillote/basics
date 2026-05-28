@@ -43,7 +43,7 @@ function addTodo(){
         id,
         createdAt,
         title,
-        status: 'active'
+        status: false
     };
 
     state.push(newTodo);
@@ -79,6 +79,24 @@ function cancelTodo(){
     editTodoId = null;
 }
 
+function completeTodo(id){
+    state = state.map(todo => {
+        if(todo.id === id){
+            if(todo.status !== true){
+                return {
+                    ...todo,
+                    status: true
+                }
+            }
+            return {
+                ...todo,
+                status: false
+            }
+        }
+        return todo
+    })
+}
+
 app.addEventListener('click', (e) => {
     const list = e.target.closest('[data-id]');
     if(!list) return;
@@ -88,7 +106,7 @@ app.addEventListener('click', (e) => {
         deleteTodo(id);
     }
 
-    if(e.target.closest('.updateBtn')){
+    if(e.target.closest('.todoTitle')){
         updateTodo(id);
     }
 
@@ -98,6 +116,10 @@ app.addEventListener('click', (e) => {
     }
     if(e.target.closest('.cancelBtn')){
         cancelTodo();
+    }
+    if(e.target.closest('.checkBox')){
+        completeTodo(id);
+        console.log(state);
     }
     render();
 })

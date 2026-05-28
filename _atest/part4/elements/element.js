@@ -14,11 +14,20 @@ export function updateTodoElement(li, todo){
 
     const saveBtn = document.createElement('button');
     saveBtn.className = 'saveBtn';
-    saveBtn.textContent = 'Save';
+
+
+
+    const saveIcon = document.createElement('i');
+    saveIcon.className = 'bi bi-save';
+    saveBtn.append(saveIcon);
 
     const cancelBtn = document.createElement('button');
     cancelBtn.className = 'cancelBtn';
-    cancelBtn.textContent = 'Cancel';
+    
+    const cancelIcon = document.createElement('i');
+    cancelIcon.className = 'bi bi-x-circle';
+
+    cancelBtn.append(cancelIcon);
 
     actions.append(saveBtn, cancelBtn);
 
@@ -41,16 +50,23 @@ export function defaultCreateTodo(li, todo){
     const wrapper = document.createElement('div');
     wrapper.className = 'todoList';
 
+    const leftContent = document.createElement('div');
+    leftContent.className = 'inputContent';
+
+    const checkBox = document.createElement('input');
+    checkBox.type = 'checkbox';
+    checkBox.checked = todo.status;
+    checkBox.className = 'checkBox';
+
     const title =  document.createElement('span');
-    title.className = 'todoTitle';
+    title.className = `todoTitle ${todo.status ? 'completeTodo' : ''}`;
     title.textContent = todo.title;
+
+    leftContent.append(checkBox, title);
 
     const actions = document.createElement('div');
     actions.className = 'btnActions';
 
-    const updateBtn = document.createElement('button');
-    updateBtn.className = 'updateBtn';
-    updateBtn.textContent = 'Update';
 
     const deleteBtn = document.createElement('button');
     deleteBtn.className = 'deleteBtn';
@@ -59,9 +75,9 @@ export function defaultCreateTodo(li, todo){
     delIcon.className = 'bi bi-trash';
     deleteBtn.append(delIcon)
 
-    actions.append(updateBtn, deleteBtn);
+    actions.append(deleteBtn);
 
-    wrapper.append(title, actions);
+    wrapper.append(leftContent, actions);
 
     li.replaceChildren(wrapper);
 
