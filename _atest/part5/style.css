@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Patrick Hand', cursive;
 }
 .app{
     display: flex;
@@ -12,5 +12,79 @@ body {
     background-color: antiquewhite;
     margin-top: 10px;
     padding: 10px 25px;
+    width: 60%;
+}
 
+#lists{
+    padding-left: 0px;
+}
+.list{
+    list-style: none;
+}
+.todoList{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(247, 237, 218);
+    padding: 15px 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    transition: all 0.25s ease;
+}
+.todoList:hover {
+    background-color: rgb(253, 245, 231);
+    transform: translateY(-2px) scale(1.02);
+}
+
+.actionBtns{
+    display: flex;
+    gap: 5px;
+}
+
+.iconLocal{
+    width: 15px;
+    height: 15px;
+}
+.updateBtn, .deleteBtn, .saveBtn, .cancelBtn{
+    background: transparent;
+    border: none;
+}
+.todoTitle{
+    padding-left: 10px;
+}
+.completeIcon{
+    cursor: pointer;
+}
+
+
+.todoAddContent{
+    display: flex;
+    align-items: center;
+}
+
+.inputWrapper{
+    width: 320px;
+}
+
+.todoInput {
+  width: 100%;
+  border: none;
+
+  background-color: transparent;
+  background-image: url('./image/inputline.svg');
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: auto 3px;
+
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #444;
+  padding: 10px 4px;
+  font-size: 18px;
+  outline: none;
+}
+.todoInput::placeholder {
+    color: #888;
+}
+
+.todoInput:focus {
+    background-image: url('./image/inputline.svg');
 }
