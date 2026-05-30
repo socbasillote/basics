@@ -1,0 +1,41 @@
+body {
+    margin: 0px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#app{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.todoUI{
+    background-color: antiquewhite;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px;
+    padding: 20px 35px;
+}
+
+
+#lists{
+    margin-top: 20px;
+    padding-left: 0px;
+}
+.list {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.todoTitle{
+    font-size: 18px;
+    padding-left: 5px;
+}
+.checkBox{
+    width: 20px;
+}
+.btnActions{
+    display: flex;
+    gap: 5px;
+}
