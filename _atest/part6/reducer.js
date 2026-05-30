@@ -2,7 +2,8 @@
 // action.type and the action.payload
 export let state = {
     todos: [],
-    editTodoId: null
+    editTodoId: null,
+    filter: 'ALL'
 }
 
 let listeners = [];
@@ -47,13 +48,44 @@ function reducer(state, action){
             return {
                 ...state,
                 todos: state.todos.map(todo => todo.id === action.payload
-                    ? {...todo, status: !todo.status ? true : false}
+                    ? {...todo, status: !todo.status}
                     : todo
                 )
             }
+        
+        case 'TODO_ACTIVE':
+            return {
+                ...state,
+                filter: 'ACTIVE'
+            };
+        
+        case 'TODO_COMPLETE':
+            return {
+                ...state,
+                filter: 'COMPLETE'
+            };
+
+        case 'TODO_ALL':
+            return {
+                ...state,
+                filter: 'ALL'
+            }
+        default:
+            return state
+    }
+}
+
+export function getFilteredTodos(){
+
+    switch(state.filter){
+        case 'ACTIVE':
+            return state.todos.filter(todo => !todo.status);
+
+        case 'COMPLETE':
+            return state.todos.filter(todo => todo.status);
 
         default:
-            state
+            return state.todos;
     }
 }
 

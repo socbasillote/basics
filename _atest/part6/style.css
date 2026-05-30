@@ -39,3 +39,7 @@ body {
     display: flex;
     gap: 5px;
 }
+
+.filterBtns{
+    margin-top: 10px;
+}
