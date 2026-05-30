@@ -13,7 +13,9 @@ const addTodoBtn = document.querySelector('.addTodoBtn');
 function render(){
     lists.innerHTML = '';
 
-    state.todos.forEach(todo => {
+    state.todos
+    .sort((a,b) => b.createdAt - a.createdAt)
+    .forEach(todo => {
         createTodo(todo);
     });
 }
@@ -74,6 +76,10 @@ app.addEventListener('click', (e) => {
     }
     if(e.target.closest('.cancelBtn')){
         dispatch({type: 'CANCEL_EDIT', payload: null})
+    }
+
+    if(e.target.closest('.checkBox')){
+        dispatch({type: 'TOGGLE_TODO', payload: id})
     }
 
 });

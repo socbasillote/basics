@@ -59,7 +59,7 @@ export function reducer(state, action){
 }
 
 export function dispatch(action){
-    state = reducer(state,action);
+    state = reducer(state, action);
     listeners.forEach(fn => fn());
 }
 
