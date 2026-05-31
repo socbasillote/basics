@@ -75,25 +75,4 @@ export function reducer(state, action){
     }
 }
 
-export function getFilteredTodos(){
 
-    switch(state.filter){
-        case 'ACTIVE':
-            return state.todos.filter(todo => !todo.status);
-
-        case 'COMPLETE':
-            return state.todos.filter(todo => todo.status);
-
-        default:
-            return state.todos;
-    }
-}
-
-export function dispatch(action){
-    state = reducer(state, action);
-    listeners.forEach(fn => fn());
-}
-
-export function subscribe(fn){
-    listeners.push(fn);
-}

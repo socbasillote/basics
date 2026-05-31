@@ -1,6 +1,6 @@
 import { saveTodo } from "../part5/handler.js";
 import { defaultCreateTodo, updateTodoElement } from "./elemnt.js";
-import { reducer, state, subscribe } from "./reducer.js";
+import { reducer, state } from "./reducer.js";
 import { getFilteredTodos } from "./redux/selectors.js";
 import { createStore } from "./redux/store.js";
 
