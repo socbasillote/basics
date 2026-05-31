@@ -1,7 +1,10 @@
 import { saveTodo } from "../part5/handler.js";
 import { defaultCreateTodo, updateTodoElement } from "./elemnt.js";
-import { dispatch, getFilteredTodos, state, subscribe } from "./reducer.js";
+import { reducer, state, subscribe } from "./reducer.js";
+import { getFilteredTodos } from "./redux/selectors.js";
+import { createStore } from "./redux/store.js";
 
+const store = createStore(reducer, state);
 const app = document.getElementById('app');
 const lists = document.getElementById('lists');
 
@@ -13,7 +16,10 @@ const addTodoBtn = document.querySelector('.addTodoBtn');
 function render(){
     lists.innerHTML = '';
 
-    getFilteredTodos()
+    const state = store.getState();
+    const filteredTodos = getFilteredTodos(state);
+
+    filteredTodos
     .sort((a,b) => b.createdAt - a.createdAt)
     .forEach(todo => {
         createTodo(todo);
@@ -40,6 +46,7 @@ function createTodo(todo){
 }
 
 function addTodo(){
+    console.log('test')
     const title = todoInput.value.trim();
     if(!title) return;
 
@@ -50,7 +57,7 @@ function addTodo(){
         status: false
     }
 
-    dispatch({ type: "ADD_TODO", payload: newTodo});
+    store.dispatch({ type: "ADD_TODO", payload: newTodo});
     todoInput.value = '';
 }
 
@@ -60,26 +67,26 @@ app.addEventListener('click', (e) => {
     const id = li.dataset.id;
 
     if(e.target.closest('.checkBox')){
-        dispatch({type: 'TOGGLE_TODO', payload: id})
+        store.dispatch({type: 'TOGGLE_TODO', payload: id})
     }
 
 
     if (e.target.closest('.deleteBtn')){
-        dispatch({type: 'DELETE_TODO', payload: id})
+        store.dispatch({type: 'DELETE_TODO', payload: id})
        // console.log('test')
     }
     if(e.target.closest('.updateBtn')){
-        dispatch({type: "UPDATE_TODO", payload: id});
+        store.dispatch({type: "UPDATE_TODO", payload: id});
         console.log('test')
     }
 
 
     if(e.target.closest('.saveBtn')){
         const editInput = document.querySelector('.editInput');
-        dispatch({type: 'SAVE_TODO', payload: {id, title: editInput.value}})
+        store.dispatch({type: 'SAVE_TODO', payload: {id, title: editInput.value}})
     }
     if(e.target.closest('.cancelBtn')){
-        dispatch({type: 'CANCEL_EDIT', payload: null})
+        store.dispatch({type: 'CANCEL_EDIT', payload: null})
     }
 });
 
@@ -87,18 +94,18 @@ app.addEventListener('click', (e) => {
         //filter
     if (e.target.closest('.activeBtn')){
         console.log('test')
-       dispatch({type: 'TODO_ACTIVE'})
+       store.dispatch({type: 'TODO_ACTIVE'})
     }
     if (e.target.closest('.completeBtn')){
         console.log('test')
-       dispatch({type: 'TODO_COMPLETE'})
+       store.dispatch({type: 'TODO_COMPLETE'})
     }
     if (e.target.closest('.allBtn')){
         console.log('test')
-       dispatch({type: 'TODO_ALL'})
+       store.dispatch({type: 'TODO_ALL'})
     }
 })
 
-subscribe(render);
+store.subscribe(render);
 
 addTodoBtn.addEventListener('click', addTodo);
