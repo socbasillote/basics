@@ -6,7 +6,7 @@ export function createTodoDefault(li, todo){
     leftContent.className = 'leftContent';
 
     const checkBox = document.createElement('img');
-    checkBox.src = './images/incomplete.png';
+    checkBox.src = `./images/${todo.status ? 'complete' : 'incomplete'}.png`;
     checkBox.alt = 'complete';
     checkBox.className = 'checkBox';
 

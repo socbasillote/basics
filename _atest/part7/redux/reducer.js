@@ -41,6 +41,15 @@ function reducer(state, action){
                 ...state,
                 editIdTodo: null
             };
+
+        case 'TOGGLE_TODO':
+            return {
+                ...state,
+                todos: state.todos.map(todo => todo.id === action.payload
+                    ? {...todo, status: !todo.status}
+                    : todo
+                )
+            }
         default:
             return state;
     }

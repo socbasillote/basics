@@ -75,6 +75,11 @@ app.addEventListener('click', (e) => {
         dispatch({type: 'CANCEL_UPDATE'})
     }
 
+    if(e.target.closest('.checkBox')){
+        dispatch({type: 'TOGGLE_TODO', payload: id})
+        console.log(state)
+    }
+
 })
 
 subscribe(render);
