@@ -1,7 +1,8 @@
 
 export let state = {
     todos: [],
-    editIdTodo: null
+    editIdTodo: null,
+    filterTodo: 'ALL',
 
 }
 
@@ -50,6 +51,26 @@ function reducer(state, action){
                     : todo
                 )
             }
+
+            
+        case 'ACTIVE_TODO':
+            return {
+                ...state,
+                filterTodo: action.payload
+            }
+
+        case 'SORT_HIGH':
+            return {
+                ...state,
+                todos: state.todos.sort((a, b) =>  b.priority - a.priority)
+            };
+            
+        case 'SORT_LOW':
+            return {
+                ...state,
+                todos: state.todos.sort((a, b) =>  a.priority - b.priority)
+            }
+
         default:
             return state;
     }

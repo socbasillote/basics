@@ -9,12 +9,44 @@
 </head>
 <body>
     <main>
-        <div id="app" class="app">
+        <nav class="nav">
+            <h2>Todo App</h2>
             <div>
-                <h1>Todo Ap</h1>
-                <div>
+                <ul class="navList">
+                    <li>About us</li>
+                    <li>Services</li>
+                    <li>Login</li>
+                </ul>
+            </div>
+        </nav>
+        <div id="app" class="app">
+            <div class="appContent">
+                <div class="todoCreate">
                     <input type="text" placeholder="Add todo..." class="todoInput" />
+                    <div>
+                        <label>Priority: </label>
+                        <select id="priority" name="priority">
+                            <option value="1">Low</option>
+                            <option value="2">Mid</option>
+                            <option value="3">High</option>
+                        </select>
+                    </div>
                     <button class="addTodoBtn">Add</button>
+                </div>
+                <div class="filterButtons">
+                    <div>
+                        <button class="allBtn">All</button>
+                        <button class="activeBtn">Active</button>
+                        <button class="completeBtn">Complete</button>
+                    </div>
+                    <div>
+                        <label>Sort: </label>
+                        <select id="filterPriority" name="priority">
+                            <option value="1">Low</option>
+                            <option value="2">Mid</option>
+                            <option value="3">High</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
                     <ul id="lists"></ul>

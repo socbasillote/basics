@@ -15,7 +15,7 @@ export function createTodoDefault(li, todo){
     todoTitle.className = 'todoTitle';
 
     const actions = document.createElement('div');
-    actions.className = actions;
+    actions.className = 'btnActions';
 
     const updateBtn = document.createElement('button');
     updateBtn.textContent = 'Update';
@@ -28,7 +28,9 @@ export function createTodoDefault(li, todo){
     leftContent.append(checkBox, todoTitle);
     actions.append(updateBtn, deleteBtn);
 
-    li.append(leftContent, actions);
+    wrapper.append(leftContent, actions)
+
+    li.append(wrapper);
 }
 
 

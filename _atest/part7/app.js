@@ -1,16 +1,22 @@
 import { createTodoDefault, updateTodoElement } from "./elemnt.js";
 import { dispatch, state, subscribe } from "./redux/reducer.js";
+import { getFilterTodo } from "./redux/selectors.js";
 
 const app = document.getElementById('app');
 const lists = document.getElementById('lists');
+
+const priorities = document.getElementById('priority');
+const filterPriority = document.getElementById('filterPriority');
 
 const todoInput = document.querySelector('.todoInput');
 const addTodoBtn = document.querySelector('.addTodoBtn');
 
 function render(){
     lists.innerHTML = '';
-    
-    state.todos.forEach(todo => {
+
+    const filterTodo = getFilterTodo(state);
+
+    filterTodo.forEach(todo => {
         createTodo(todo);
     })
 
@@ -19,7 +25,7 @@ function render(){
 function createTodo(todo){
     const li = document.createElement('li');
     li.dataset.id = todo.id;
-    li.className = 'list';
+    li.className = `list ${todo.priority === 1 ? 'priolow' : todo.priority === 2 ? 'priomid' : 'priohigh'}`;
 
     if(state.editIdTodo === todo.id){
         updateTodoElement(li, todo);
@@ -37,17 +43,20 @@ function createTodo(todo){
 
 function addTodo(){
     const title = todoInput.value.trim();
+    const prop = Number(priorities.value); 
     if(!title) return;
     
     const newTodo = {
         id: crypto.randomUUID(),
         createdAt: Date.now(),
         title,
-        status: false
+        status: false,
+        priority: prop
     }
 
     dispatch({type: 'ADD_TODO', payload: newTodo})
     todoInput.value = '';
+    console.log(state);
 }
 
 
@@ -80,6 +89,32 @@ app.addEventListener('click', (e) => {
         console.log(state)
     }
 
+})
+
+app.addEventListener('click', (e) => {
+    if(e.target.closest('.completeBtn')){
+        console.log(state)
+        dispatch({type: 'ACTIVE_TODO', payload: 'COMPLETE'})
+    }
+    if(e.target.closest('.activeBtn')){
+        console.log(state)
+        dispatch({type: 'ACTIVE_TODO', payload: 'ACTIVE'})
+    }
+    if(e.target.closest('.allBtn')){
+        console.log(state)
+        dispatch({type: 'ACTIVE_TODO', payload: 'ALL'})
+    }
+})
+
+filterPriority.addEventListener('change', (e) => {
+    const num = Number(e.target.value);
+
+    if(num === 3){
+        dispatch({type: 'SORT_HIGH'})
+    }
+    if(num === 1){
+        dispatch({type: 'SORT_LOW'})
+    }
 })
 
 subscribe(render);
