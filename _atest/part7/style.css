@@ -104,3 +104,15 @@ body{
 
 }
 
+
+.list {
+    cursor: grab;
+}
+
+.list.dragging {
+    opacity: 0.5;
+}
+
+.list:active {
+    cursor: grabbing;
+}

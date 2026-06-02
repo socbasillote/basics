@@ -25,6 +25,10 @@ function render(){
 function createTodo(todo){
     const li = document.createElement('li');
     li.dataset.id = todo.id;
+    li.draggable = true;
+
+  
+
     li.className = `list ${todo.priority === 1 ? 'priolow' : todo.priority === 2 ? 'priomid' : 'priohigh'}`;
 
     if(state.editIdTodo === todo.id){
@@ -78,7 +82,10 @@ app.addEventListener('click', (e) => {
     }
     if(e.target.closest('.saveBtn')){
         const newTitle = document.querySelector('.editInput');
-        dispatch({type: 'SAVE_TODO', payload: {id: id, title: newTitle.value}})
+        const editPriority = document.getElementById('editPriority');
+        
+        dispatch({type: 'SAVE_TODO', payload: {id: id, title: newTitle.value, priority: Number(editPriority.value)}})
+        console.log(state);
     }
     if(e.target.closest('.cancelBtn')){
         dispatch({type: 'CANCEL_UPDATE'})
@@ -116,5 +123,77 @@ filterPriority.addEventListener('change', (e) => {
         dispatch({type: 'SORT_LOW'})
     }
 })
+
+let draggedItem = null;
+lists.addEventListener('dragstart', (e) => {
+    const li = e.target.closest('.list');
+    if (!li) return;
+
+    draggedItem = li;
+    li.classList.add('dragging');
+})
+
+lists.addEventListener('dragend', (e) => {
+    const li = e.target.closest('.list');
+    if (!li) return;
+
+    li.classList.remove('dragging');
+    draggedItem = null;
+    
+    // saveOrder();
+})
+
+lists.addEventListener('dragover', (e) => {
+    e.preventDefault();
+
+    const afterElement = getDragAfterElement(
+        lists,
+        e.clienty
+    );
+
+    if (!draggedItem) return;
+
+    if (afterElement == null){
+        lists.appendChild(draggedItem)
+    } else {
+        lists.insertBefore(draggedItem, afterElement);
+    }
+});
+
+function getDragAfterElement(container, y) {
+    const elements = [
+        ...container.querySelectorAll('.list:not(.dragging)')
+    ];
+
+    return elements.reduce(
+        (closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+
+            if (offset < 0 && offset > closest.offset) {
+                return {
+                    offset,
+                    element: child
+                };
+            }
+
+            return closest;
+        },
+        {
+            offset: Number.NEGATIVE_INFINITY
+        }
+    ).element;
+}
+
+function saveOrder(){
+    const orderedIds = [
+        ...lists.querySelectorAll('.list')
+    ].map(li => li.dataset.id);
+
+    dispatch({
+        type: 'REORDER_TODOS',
+        payload: orderedIds
+    });
+}
 
 subscribe(render);

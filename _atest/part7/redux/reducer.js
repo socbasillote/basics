@@ -32,7 +32,7 @@ function reducer(state, action){
             return {
                 ...state,
                 todos: state.todos.map(todo => todo.id === action.payload.id 
-                    ? {...todo, title: action.payload.title} 
+                    ? {...todo, title: action.payload.title, priority: action.payload.priority} 
                     : todo
                 ),
                 editIdTodo: null
@@ -70,6 +70,17 @@ function reducer(state, action){
                 ...state,
                 todos: state.todos.sort((a, b) =>  a.priority - b.priority)
             }
+
+        case 'REORDER_TODOS': {
+            const orderedTodos = action.payload.map(id =>
+                state.todos.find(todo => todo.id === id)
+            );
+
+            return {
+                ...state,
+                todos: orderedTodos
+            };
+        }
 
         default:
             return state;
