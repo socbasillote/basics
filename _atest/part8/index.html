@@ -13,7 +13,22 @@
             <h1>Todo List</h1>
             <div>
                 <input type="text" placeholder="Add value" class="todoInput" />
+                
+                
+                    <label>Priority: </label>
+                    <select class="prioSelect" name="prioSelect">
+                        <option value="1">Low</option>
+                        <option value="2">Mid</option>
+                        <option value="3">High</option>
+                    </select>
+                
+                
                 <button class="addTodoBtn">Add</button>
+            </div>
+            <div>
+                <button class="allBtn">All</button>
+                <button class="activeBtn">Active</button>
+                <button class="completeBtn">Complete</button>
             </div>
             <div>
                 <ul id="lists"></ul>
