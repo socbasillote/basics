@@ -8,6 +8,7 @@ export function getTodoFilter(state){
             return state.todos.filter(todo => todo.status);
         
         default:
-            return state.todos;
+             return state.todos
+           
     }
 }

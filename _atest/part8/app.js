@@ -7,10 +7,10 @@ const lists = document.getElementById('lists');
 
 const todoInput = document.querySelector('.todoInput');
 const prioSelect = document.querySelector('.prioSelect');
+const prioSort = document.querySelector('.prioSort');
 const addTodoBtn = document.querySelector('.addTodoBtn');
 
-
-
+let startUp = 1;
 function render(){
     lists.innerHTML = '';
     let initialState = getState();
@@ -19,7 +19,6 @@ function render(){
     state.forEach(todo => {
         createTodo(todo);
     })
-    
 }
 
 function createTodo(todo){
@@ -42,7 +41,7 @@ function createTodo(todo){
 }
 
 function addTodo(){
-
+    if(!todoInput.value)return;
     const newTodo = {
         title: todoInput.value,
         id: crypto.randomUUID(),
@@ -53,6 +52,8 @@ function addTodo(){
 
     dispatch({type: 'ADD_TODO', payload: newTodo})
     todoInput.value = '';
+    prioSelect.value = '1';
+
     console.log(getState());
 }
 
@@ -78,11 +79,36 @@ app.addEventListener('click', (e) => {
         console.log('check')
         dispatch({type: 'TOGGLE_TODO', payload: id})
     }
-    
-    
+})
 
+app.addEventListener('click', (e) => {
+    if(e.target.closest('.allBtn')){
+        dispatch({type: 'ALL_TODO', payload: 'ALL'})
+        console.log('active')
+    }
+
+    if(e.target.closest('.activeBtn')){
+        dispatch({type: 'ACTIVE_TODO', payload: 'ACTIVE'})
+    }
+    if(e.target.closest('.completeBtn')){
+        dispatch({type: 'COMPLETE_TODO', payload: 'COMPLETE'})
+    }
 })
 
 addTodoBtn.addEventListener('click', addTodo);
+
+prioSort.addEventListener('change', (e) => {
+    const value = Number(e.target.value);
+    console.log(value);
+    if(value === 3){
+        dispatch({type: 'SORT_HIGH'})
+    }
+    if(value === 1){
+        dispatch({type: 'SORT_LOW'})
+    }
+})
+
+dispatch({type: 'START_UP'})
+console.log('START_UP')
 
 subscribe(render);

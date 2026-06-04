@@ -3,7 +3,8 @@
 export let state = {
     todos: [],
     edidTodoId: null,
-    filterTodo: 'ALL'
+    filterTodo: 'ALL',
+    sortTodo: 'High'
 }
 
 let listeners = [];
@@ -11,6 +12,11 @@ let listeners = [];
 function reducer(state, action){
 
     switch(action.type){
+        case 'START_UP':
+            return {
+                ...state,
+                todos: state.todos.sort((a, b) => a.createdAt - b.createdAt)
+            }
         case 'ADD_TODO':
             return {
                 ...state,
@@ -50,12 +56,40 @@ function reducer(state, action){
                 edidTodoId: null
             }
 
-
+        
+        case 'ALL_TODO':
+            return {
+                ...state,
+                filterTodo: action.payload
+            }
         case 'ACTIVE_TODO':
             return {
                 ...state,
                 filterTodo: action.payload
             }
+        case 'COMPLETE_TODO':
+            return {
+                ...state,
+                filterTodo: action.payload
+            }
+        
+
+        case 'SORT_LOW':{
+            return {
+                ...state,
+                todos: state.todos.sort((a, b) => b.priority - a.priority),
+                sortTodo: 'Low'
+            }
+        }
+
+        case 'SORT_HIGH': {
+            return {
+                ...state,
+                todos: state.todos.sort((a,b) => a.priority - b.priority),
+                sortTodo: 'High'
+            }
+        }
+            
         default: 
             return state
     }
