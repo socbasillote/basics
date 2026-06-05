@@ -1,64 +1,34 @@
-export function createStore(
-    reducer,
-    initialState,
-    middlewares = []
-){
+
+
+export function createStore(reducer, initialState){
 
     let state = initialState;
 
-    let listeners = [];
+    let listeners = []; // is simply a callback that gets notifeid whenever dispatch() changes the state
 
     function getState(){
         return state;
     }
-
-    function subscribe(listener){
-
-        listeners.push(listener);
-
-        return function unsubscribe() {
-            listeners = listeners.filter(l => l !== listener);
-        };
-    }
-
-    function baseDispatch(action) {
-
+    
+    function dispatch(action) {
         state = reducer(state, action);
 
         listeners.forEach(listener => listener());
-
-        return action;
     }
 
-    const store = {
+    function subscribe(listener){
+        listeners.push(listener);
+
+        return function unsubscribe() {
+            listener = listeners.filter(i => i !== listener);
+        };
+    }
+
+    dispatch({ type: '@@INIT' });
+
+    return {
         getState,
-        subscribe,
-        dispatch: baseDispatch
-    };
-
-    const middlewareAPI = {
-        getState,
-        dispatch: (action) => store.dispatch(action)
-    };
-
-    const chain = middlewares.map(
-        middleware => middleware(middlewareAPI)
-    );
-
-    store.dispatch = compose(...chain)(baseDispatch);
-
-    store.dispatch({ type: '@@INIT' });
-
-    return store;
-}
-
-function compose(...functions) {
-    
-    return function (dispatch) {
-
-        return functions.reduceRight(
-            (acc, fn) => fn(acct),
-            dispatch
-        );
+        dispatch,
+        subscribe
     }
 }
