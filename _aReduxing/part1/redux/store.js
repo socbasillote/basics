@@ -47,3 +47,9 @@ export function createStore(reducer, initialState, middlewares = []){
 
     return store;
 }
+
+function compose(...functions){
+    return function (dispatch) {
+        return functions.reduceRight((acc, fn) => fn(acc), dispatch);
+    }
+}
