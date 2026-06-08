@@ -1,14 +1,11 @@
 
-
-export let initialState = {
+let initialState = {
     todos: [],
     editTodoId: null,
     filterTodo: 'ALL'
 }
 
-let listeners = [];
-
-function reducer(state, action){
+export function reducer(state = initialState, action){
 
     switch(action.type){
         case 'ADD_TODO':
@@ -44,15 +41,4 @@ function reducer(state, action){
         default:
             return state
     }
-}
-
-
-export function dispatch(action){
-    initialState = reducer(initialState, action);
-
-    listeners.forEach(func => func());
-}
-
-export function subscriber(fn){
-    listeners.push(fn);
 }

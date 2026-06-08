@@ -1,4 +1,5 @@
-import { dispatch, initialState, subscriber } from "./redux/reducer.js";
+import {  initialState, reducer } from "./redux/reducer.js";
+import { createStore } from "./redux/store.js";
 import { defaultTodo, updateTodoElement } from "./ui/elemnt.js";
 
 const app = document.getElementById('app');
@@ -7,11 +8,11 @@ const lists = document.getElementById('lists');
 const todoInput = document.querySelector('.todoInput');
 const addTodoBtn = document.querySelector('.addTodoBtn');
 
-
+const store = createStore(reducer);
 
 function render(){
     lists.textContent = '';
-    let state = initialState;
+    let state = store.getState();
 
     state.todos.forEach(todo => {
         createTodo(todo);
@@ -25,7 +26,7 @@ function createTodo(todo){
     li.dataset.id = todo.id;
     li.className = 'list';
 
-    if(initialState.editTodoId === todo.id) {
+    if(store.getState().editTodoId === todo.id) {
         updateTodoElement(li, todo);
         lists.appendChild(li);
         return;
@@ -46,7 +47,7 @@ function addTodo(){
         priority: 1
     }
 
-    dispatch({type: 'ADD_TODO', payload: newTodo})
+    store.dispatch({type: 'ADD_TODO', payload: newTodo})
     todoInput.value = '';
 }
 
@@ -56,20 +57,22 @@ app.addEventListener('click', (e) => {
     const id = li.dataset.id;
 
     if(e.target.closest('.deleteBtn')){
-        dispatch({type: 'DELETE_TODO', payload: id})
+        store.dispatch({type: 'DELETE_TODO', payload: id})
     }
     if(e.target.closest('.updateBtn')){
-        dispatch({type: 'UPDATE_TODO', payload: id})
+        console.log('test')
+        store.dispatch({type: 'UPDATE_TODO', payload: id})
     }
     if(e.target.closest('.saveBtn')){
-        const newTitle = document.querySelector('.editInput')
-        dispatch({type: 'SAVE_TODO', payload: {id, title: newTitle.value}})
+        const newTitle = li.querySelector('.editInput')
+        store.dispatch({type: 'SAVE_TODO', payload: {id, title: newTitle.value}})
     }
     if(e.target.closest('.cancelBtn')){
-        dispatch({type: 'CANCEL_EDIT'})
+        store.dispatch({type: 'CANCEL_EDIT'})
     }
 })
 
 addTodoBtn.addEventListener('click', addTodo)
 
-subscriber(render);
+render();
+store.subscribe(render);
