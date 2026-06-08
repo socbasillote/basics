@@ -20,8 +20,27 @@ function reducer(state, action){
             return {
                 ...state,
                 todos: state.todos.filter(todo => todo.id !== action.payload)
+            };
+        
+        case 'UPDATE_TODO':
+            return {
+                ...state,
+                editTodoId: action.payload
             }
-
+        case 'SAVE_TODO':
+            return {
+                ...state,
+                todos: state.todos.map(todo => todo.id === action.payload.id
+                    ? {...todo, title: action.payload.title}
+                    : todo
+                 ),
+                 editTodoId: null
+            }
+        case 'CANCEL_EDIT':
+            return {
+                ...state,
+                editTodoId: null
+            }
         default:
             return state
     }
