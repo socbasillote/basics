@@ -1,9 +1,10 @@
 
-let listeners = [];
 
-export function createStore(reducer, initialState, middlewares = []){
 
-    let state = initialState
+export function createStore(reducer, middlewares = []){
+
+    let state = reducer(undefined, { type: '@@INIT'});
+    let listeners = [];
 
     function getState(){
         return state;
@@ -38,11 +39,9 @@ export function createStore(reducer, initialState, middlewares = []){
 
     const chain = middlewares.map(middleware => middleware(middlewareAPI));
 
-    const composedDispatch = compose(...chain)(baseDispatch);
+    
+    store.dispatch = compose(...chain)(baseDispatch);
 
-    store.dispatch = composedDispatch;
-
-    store.dispatch({ type: '@@INIT'});
 
     return store
 

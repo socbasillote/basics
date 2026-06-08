@@ -1,4 +1,5 @@
-import {  initialState, reducer } from "./redux/reducer.js";
+import { loggerMiddleware, persistMiddleware, timerMiddleware } from "./redux/loggerMiddleware.js";
+import { reducer } from "./redux/reducer.js";
 import { createStore } from "./redux/store.js";
 import { defaultTodo, updateTodoElement } from "./ui/elemnt.js";
 
@@ -8,25 +9,25 @@ const lists = document.getElementById('lists');
 const todoInput = document.querySelector('.todoInput');
 const addTodoBtn = document.querySelector('.addTodoBtn');
 
-const store = createStore(reducer);
+const store = createStore(reducer, [loggerMiddleware, timerMiddleware, persistMiddleware]);
 
 function render(){
     lists.textContent = '';
     let state = store.getState();
 
     state.todos.forEach(todo => {
-        createTodo(todo);
+        createTodo(todo, state.editTodoId);
     })
 
 }
 
 
-function createTodo(todo){
+function createTodo(todo, editTodoId){
     const li = document.createElement('li');
     li.dataset.id = todo.id;
     li.className = 'list';
 
-    if(store.getState().editTodoId === todo.id) {
+    if(editTodoId === todo.id) {
         updateTodoElement(li, todo);
         lists.appendChild(li);
         return;
