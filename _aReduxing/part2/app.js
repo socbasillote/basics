@@ -38,6 +38,7 @@ function createTodo(todo, editTodoId){
     lists.appendChild(li);
 }
 
+
 function addTodo(){
     console.log('add')
     const newTodo = {
