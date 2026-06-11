@@ -12,13 +12,11 @@ store = applyMiddleware(
         persistenceMiddleware
     );
 
-const profile =
-    document.getElementById("profile");
+const profile = document.getElementById("profile");
 
 function render(){
 
-    const state =
-        store.getState();
+    const state =  store.getState();
 
     if(state.isAuthenticated){
 
@@ -38,11 +36,8 @@ function render(){
             </div>
         `;
 
-        document
-            .getElementById("logoutBtn")
-            .addEventListener(
-                "click",
-                () =>
+        document.getElementById("logoutBtn")
+        .addEventListener("click", () =>
                     store.dispatch({
                         type:'LOGOUT'
                     })
@@ -50,24 +45,14 @@ function render(){
 
     }else{
 
-        profile.innerHTML =
-            "<p>Not Logged In</p>";
+        profile.innerHTML = "<p>Not Logged In</p>";
     }
 }
 
-document
-    .getElementById("loginBtn")
-    .addEventListener(
-        "click",
-        () => {
+document.getElementById("loginBtn")
+    .addEventListener("click", () => {
 
-            const username =
-                document
-                .getElementById(
-                    "usernameInput"
-                )
-                .value
-                .trim();
+            const username = document.getElementById( "usernameInput").value.trim();
 
             if(!username) return;
 
