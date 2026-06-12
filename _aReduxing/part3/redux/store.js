@@ -1,7 +1,6 @@
+import { reducer } from "./reducer.js";
 
-
-
-export function createStore(reducer){
+export function createStore(){
 
     let state = {
         todos: [],

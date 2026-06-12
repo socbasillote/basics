@@ -25,3 +25,12 @@ body {
     display: flex;
     justify-content: center;
 }
+
+ul{
+    padding-left: 0px;
+}
+.list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

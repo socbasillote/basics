@@ -1,20 +1,18 @@
-import { reducer } from "./redux/reducer.js";
+import { btnEvents } from "./events/evnts.js";
 import { createStore } from "./redux/store.js";
-import { defaultTodo } from "./ui/listElement.js";
+import { defaultTodo, editTodo } from "./ui/listElement.js";
 
 const app = document.getElementById('app');
 const lists = document.getElementById('lists');
 
-const todoInput = document.querySelector('.todoInput');
-const addTodoBtn = document.querySelector('.addTodoBtn');
-
-const store = createStore(reducer);
+const store = createStore();
 
 
 function render(){
     lists.textContent = '';
+    let state = store.getState().todos;
     
-    store.getState().todos.forEach(todo => {
+    state.forEach(todo => {
         createTodo(todo);
     })
 }
@@ -25,27 +23,21 @@ function createTodo(todo){
     li.dataset.id = todo.id;
     li.className = 'list';
 
+    if(store.getState().editIdTodo === todo.id){
+        editTodo(li, todo);
+        lists.appendChild(li);
+
+        const editInputFocus = document.querySelector('.editInput');
+        editInputFocus.focus();
+        editInputFocus.setSelectionRange(editInputFocus.value.length, editInputFocus.value.length);
+        return;
+    }
     defaultTodo(li, todo);
 
     lists.appendChild(li);
 }
 
-function addTodo(){
-    const titleValue = todoInput.value;
-    const id = crypto.randomUUID();
-    const createdAt = Date.now();
 
-    const newTodo = {
-        id,
-        createdAt,
-        title: titleValue,
-        status: false,
-        priority: 1,
-    }
+btnEvents(store);
 
-    store.dispatch({type: 'ADD_TODO', payload: newTodo})
-
-}
-
-addTodoBtn.addEventListener('click', addTodo)
 store.subscriber(render);

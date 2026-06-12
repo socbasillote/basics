@@ -16,6 +16,19 @@ export function reducer(state, action){
                 todos: state.todos.filter(todo => todo.id !== action.payload)
             };
 
+        case 'UPDATE_TODO':
+            return {
+                ...state,
+                editIdTodo: action.payload
+            }
+
+        
+        case 'CANCEL_UPDATE':
+            return {
+                ...state,
+                editIdTodo: action.payload
+            }
+
         default:
             return state
     }
