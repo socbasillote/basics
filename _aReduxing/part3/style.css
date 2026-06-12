@@ -1,0 +1,27 @@
+body {
+    margin: 0px;
+}
+
+.navBar{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 20px;
+}
+
+.rightNav{
+    display: flex;
+    gap: 20px;
+}
+.rightNav li{
+    list-style: none;
+
+}
+
+.rightNav li:hover{
+    color: rgb(28, 13, 231);
+    font-weight: bold;
+}
+.app {
+    display: flex;
+    justify-content: center;
+}
