@@ -6,7 +6,7 @@ export function defaultTodo(li, todo){
     leftContent.className = 'leftContent';
 
     const checkComplete = document.createElement('img');
-    checkComplete.src = './images/complete.png';
+    checkComplete.src = `./images/${todo.status ? 'complete' : 'incomplete'}.png`;
     checkComplete.alt = 'Check Complete';
     checkComplete.className = 'checkComplete';
 

@@ -17,13 +17,16 @@ export function btnEvents(store){
         }
         if(e.target.closest('.updateBtn')){
             store.dispatch({type: 'UPDATE_TODO', payload: id})
-            console.log(id);
         }
         if(e.target.closest('.saveBtn')){
-            console.log('save')
+            const title = document.querySelector('.editInput').value
+            store.dispatch({type: 'SAVE_TODO', payload: {id, title, priority: 2}})
         }
-        if(e.target.closest('cancelBtn')){
+        if(e.target.closest('.cancelBtn')){
             store.dispatch({type: 'CANCEL_UPDATE'})
+        }
+        if(e.target.closest('.checkComplete')){
+            store.dispatch({type: 'TOGGLE_TODO', payload: id})
         }
     })
 

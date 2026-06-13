@@ -6,11 +6,10 @@ const todoInput = document.querySelector('.todoInput');
 
 export function addTodo(store){
     const titleValue = todoInput.value;
-    const id = crypto.randomUUID();
     const createdAt = Date.now();
 
     const newTodo = {
-        id,
+        id:  crypto.randomUUID(),
         createdAt,
         title: titleValue,
         status: false,
