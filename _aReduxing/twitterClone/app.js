@@ -1,10 +1,12 @@
+import { persistData } from "./reduxing/persistData.js";
 import createStore from "./reduxing/store.js";
 
 const form = document.getElementById('postForm');
 const input = document.getElementById('postInput');
 const feed = document.getElementById('feed');
 
-const store = createStore();
+
+const store = createStore([persistData]);
 
 function render(){
     feed.textContent = '';
@@ -59,3 +61,5 @@ form.addEventListener('submit', (e) => {
 })
 
 store.subscriber(render);
+
+render();

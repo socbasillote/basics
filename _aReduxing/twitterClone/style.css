@@ -25,6 +25,7 @@ main {
   padding: 15px;
   border-radius: 10px;
   max-width: 500px;
+  min-width: 350px;
   margin: auto;
   position: relative;
 }
@@ -52,6 +53,7 @@ button {
   border-radius: 6px;
   cursor: pointer;
   max-width: 60px;
+  align-self: self-end;
 }
 
 #feed {
