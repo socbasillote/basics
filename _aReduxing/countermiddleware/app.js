@@ -1,4 +1,5 @@
 import { logger } from "./redux/logger.js";
+import { persisting } from "./redux/persisting.js";
 import { reducer } from "./redux/reducer.js"
 import { createStore } from "./redux/store.js"
 
@@ -7,7 +8,7 @@ const increment = document.querySelector('.incrementBtn');
 const decrement = document.querySelector('.decrementBtn');
 
 
-const store = createStore(reducer, [logger])
+const store = createStore(reducer, [logger, persisting])
 
 function render(){
 
@@ -24,5 +25,7 @@ increment.addEventListener("click", () => {
 decrement.addEventListener('click', () => {
     store.dispatch({type: 'DECREMENT'})
 })
+
+render();
 
 store.subscribe(render);

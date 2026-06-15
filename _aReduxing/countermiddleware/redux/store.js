@@ -1,7 +1,12 @@
 
 
+
+const data = JSON.parse(localStorage.getItem('count') || '{"count": 0}');
+
+
+
 let initialState = {
-    count: 0,
+    count: data.count
 }
 
 export function createStore(reducer, middlewares = []){
