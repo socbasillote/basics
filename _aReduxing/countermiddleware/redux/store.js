@@ -3,17 +3,19 @@
 
 const data = JSON.parse(localStorage.getItem('count') || '{"count": 0}');
 
+const userAuth = JSON.parse(localStorage.getItem('user'));
 
 
 let initialState = {
-    count: data.count
+    count: data.count,
+    users: userAuth
 }
 
 export function createStore(reducer, middlewares = []){
-
+    
     let state = initialState;
     let listeners = [];
-
+    
     function getState(){
         return state;
     }
