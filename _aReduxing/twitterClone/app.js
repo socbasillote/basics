@@ -1,5 +1,7 @@
+import { postEvents } from "./events/postEvents.js";
 import { persistData } from "./reduxing/persistData.js";
 import createStore from "./reduxing/store.js";
+import { createPost } from "./ui/contentElement.js";
 
 const form = document.getElementById('postForm');
 const input = document.getElementById('postInput');
@@ -10,45 +12,29 @@ const store = createStore([persistData]);
 
 function render(){
     feed.textContent = '';
-    const state = store.getState();
+    const {posts} = store.getState();
 
-    state.posts.forEach(post => (
-        createPost(post)
-    ))
+    posts.allIds
+        .map(id => posts.byId[id])
+        .forEach(post => createPost(post, feed));
+    
 }
 
 function addPost(text){
-    
-    const newPost = {
+
+    const newPost = { 
         id: crypto.randomUUID(),
         createdAt: Date.now(),
         text,
+        count: 0
+
     }
 
     store.dispatch({type: 'ADD_POST', payload: newPost})
-
+    console.log(store.getState());
 }
 
-function createPost(post){
-    const div = document.createElement('div');
-    div.className = 'post';
 
-    const postContent = document.createElement('span');
-    postContent.className = 'postContent'
-    postContent.textContent = post.text;
-
-
-    const editBtn = document.createElement('button');
-    editBtn.className = 'editBtn';
-    editBtn.textContent = 'Edit';
-
-    div.append(postContent, editBtn);
-    // add to feed (top first like social media)
-    feed.prepend(div);
-
-    // clear input 
-    
-}
 
 form.addEventListener('submit', (e) => {
     e.preventDefault(); // stop page reload
@@ -61,5 +47,6 @@ form.addEventListener('submit', (e) => {
 })
 
 store.subscriber(render);
+postEvents(store, feed);
 
 render();

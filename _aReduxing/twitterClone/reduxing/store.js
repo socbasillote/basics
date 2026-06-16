@@ -3,12 +3,14 @@ import { postReducer } from "./postReducer.js";
 
 export default function createStore(middlewares = []){
 
-    let data = JSON.parse(localStorage.getItem('posts') || '[]');
+
+    const postsState = JSON.parse(localStorage.getItem('posts')) || {
+        byId: {},
+        allIds: []
+    };
     
-
-
     let state = {
-        posts: data
+        posts: postsState,
     };
 
     let listeners = [];

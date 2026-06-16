@@ -62,11 +62,29 @@ button {
 }
 
 .post {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   background: white;
   padding: 12px;
   margin-top: 10px;
   border-radius: 10px;
+}
+.topContentPost{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.likePost, .sharePost, .commentPost, .savePost{
+  cursor: pointer;
+}
+
+
+.reactPost{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+.leftReactPost{
+  display: flex;
+  gap: 15px;
 }
