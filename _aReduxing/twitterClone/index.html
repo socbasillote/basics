@@ -16,7 +16,7 @@
         </ul>
     </nav>
     <main>
-        <div>
+        <div class="centerContent">
             <section class="composer">
                 <form id="postForm">
                     <textarea id="postInput" placeholder="Write a post..."></textarea>
@@ -25,7 +25,21 @@
             </section>   
             <section id="feed"></section>
         </div>
-        
+
+        <div class="modal" >
+            <div class="modal-background">
+                
+                <div class="modal-content">
+                    <div class="closeModal">X</div>
+                    <h1>Modal</h1>
+                    <form id="commentForm">
+                        <textarea class="commentInput"></textarea>
+                        <button>Submit</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
     </main>
 
     <script type="module" src="app.js"></script>

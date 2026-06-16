@@ -25,7 +25,7 @@ main {
   padding: 15px;
   border-radius: 10px;
   max-width: 500px;
-  min-width: 350px;
+  min-width: 400px;
   margin: auto;
   position: relative;
 }
@@ -66,6 +66,7 @@ button {
   padding: 12px;
   margin-top: 10px;
   border-radius: 10px;
+  width: 100%;
 }
 .topContentPost{
   display: flex;
@@ -87,4 +88,41 @@ button {
 .leftReactPost{
   display: flex;
   gap: 15px;
+}
+
+.centerContent{
+  position: relative;
+}
+
+.modal{
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.26);
+  display: none;
+
+}
+.close{
+  display: none;
+}
+.open{
+  display: block;
+}
+
+.modal-background{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-content{
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 400px;
+  width: 100%;
+  background-color: #f6faff;
+  padding: 20px;
+  border-radius: 5px;
+
 }

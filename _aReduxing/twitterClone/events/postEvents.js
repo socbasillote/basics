@@ -1,4 +1,5 @@
 export function postEvents(store, feed) {
+    const modal = document.querySelector('.modal')
     feed.addEventListener('click', (e) => {
         const post = e.target.closest('[data-id]');
         if (!post) return;
@@ -13,17 +14,10 @@ export function postEvents(store, feed) {
         }
 
         if (e.target.closest('.commentPost')) {
-            const commentsContainer =
-                post.querySelector('.commentsContainer');
+            modal.classList.add('open');
 
-            console.log(commentsContainer);
-
-            if (!commentsContainer) return;
-
-            commentsContainer.style.display =
-                commentsContainer.style.display === 'none'
-                    ? 'block'
-                    : 'none';
         }
+
     });
+    
 }

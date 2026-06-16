@@ -1,23 +1,32 @@
 import { postEvents } from "./events/postEvents.js";
 import { persistData } from "./reduxing/middlewares/persistData.js";
 import createStore from "./reduxing/store.js";
-import { createPost } from "./ui/contentElement.js";
+import { createComment, createPost } from "./ui/contentElement.js";
 
 const form = document.getElementById('postForm');
+const commentForm = document.getElementById('commentForm')
+
+
 const input = document.getElementById('postInput');
 const feed = document.getElementById('feed');
 
+const commentList = document.querySelector('.commentList')
+const commentInput = document.querySelector('.commentInput')
 
 const store = createStore([persistData]);
 
 function render(){
     feed.textContent = '';
-    const {posts} = store.getState();
+    const state = store.getState();
 
-    posts.allIds
-        .map(id => posts.byId[id])
-        .forEach(post => createPost(post, feed));
-    
+    state.posts.allIds
+        .forEach(id => {
+            const post = state.posts.byId[id];
+            createPost(post, feed);
+        })
+
+    console.log(state.comments)
+        
 }
 
 function addPost(text){
@@ -37,6 +46,18 @@ function addPost(text){
     store.dispatch({type: 'ADD_POST', payload: newPost})
 }
 
+function addComment(text){
+    
+    const newComment = {
+        id: crypto.randomUUID(),
+        post: null,
+        content: commentInput.value
+    }
+
+    store.dispatch({type: 'ADD_COMMENT', payload: newComment})
+    commentInput.value = ''
+    console.log(store.getState());
+}
 
 
 form.addEventListener('submit', (e) => {
@@ -49,7 +70,39 @@ form.addEventListener('submit', (e) => {
     input.value = "";
 })
 
+commentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const text = input.value.trim();
+    if(!text) return;
+    console.log('heelo')
+    addComment(text);
+
+    console.log(store.getState().comments);
+
+})
+
+/*     commentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        console.log('click');
+            const newComment = {
+                id: crypto.randomUUID(),
+                content: commentInput.value
+            }
+
+            store.dispatch({type: 'ADD_COMMENT', payload: newComment})
+            commentInput.value = ''
+    }) */
+
+
 store.subscriber(render);
 postEvents(store, feed);
 
 render();
+
+const modal = document.querySelector('.modal')
+
+document.querySelector('.closeModal').addEventListener('click', () => {
+    modal.classList.remove('open')
+})

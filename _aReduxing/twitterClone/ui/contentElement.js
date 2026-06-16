@@ -75,10 +75,12 @@ export function createPost(post, feed){
     const commentInput = document.createElement('input');
     commentInput.type = 'text';
     commentInput.placeholder = 'Write a comment...';
+    commentInput.classList = 'commentInput'
 
     const commentBtn = document.createElement('button');
     commentBtn.type = 'submit';
     commentBtn.textContent = 'Post';
+    commentBtn.className = 'commentBtn'
 
     commentForm.append(commentInput, commentBtn);
 
@@ -101,6 +103,8 @@ export function createPost(post, feed){
 
     reactPost.append(leftReactPost, rightReactPost)
 
+
+    
     div.append(topContent, reactPost, commentsContainer)
     // add to feed (top first like social media)
     feed.prepend(div);
@@ -108,3 +112,5 @@ export function createPost(post, feed){
     // clear input 
     
 }
+
+

@@ -2,8 +2,6 @@
 
 
 export function postReducer(state, action){
-    console.log(state);
-
     switch(action.type){
         case 'ADD_POST':
             const id  = action.payload.id;
