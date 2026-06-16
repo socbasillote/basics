@@ -10,7 +10,7 @@ export function createPost(post, feed){
 
     const postContent = document.createElement('span');
     postContent.className = 'postContent'
-    postContent.textContent = post.text;
+    postContent.textContent = post.content;
 
 
     const editBtn = document.createElement('a');
@@ -33,7 +33,7 @@ export function createPost(post, feed){
     likePost.className = 'likePost';
 
     const countLikePost = document.createElement('span');
-    countLikePost.textContent = post.count
+    countLikePost.textContent = post.likeCount
 
     likePostWrapper.append(likePost, countLikePost);
 
@@ -64,6 +64,28 @@ export function createPost(post, feed){
 
     commentPostWrapper.append(commentPost, countCommentPost);
 
+    // Comment
+    const commentsContainer = document.createElement('div');
+    commentsContainer.className = 'commentsContainer';
+    commentsContainer.style.display = 'none'
+
+    const commentForm = document.createElement('form');
+    commentForm.className = 'commentForm';
+
+    const commentInput = document.createElement('input');
+    commentInput.type = 'text';
+    commentInput.placeholder = 'Write a comment...';
+
+    const commentBtn = document.createElement('button');
+    commentBtn.type = 'submit';
+    commentBtn.textContent = 'Post';
+
+    commentForm.append(commentInput, commentBtn);
+
+    const commentsList = document.createElement('div');
+    commentsList.className = 'commentsList';
+
+    commentsContainer.append(commentForm, commentsList);
     // appending
     const rightReactPost = document.createElement('div');
     rightReactPost.className = 'rightReactPost';
@@ -79,7 +101,7 @@ export function createPost(post, feed){
 
     reactPost.append(leftReactPost, rightReactPost)
 
-    div.append(topContent, reactPost)
+    div.append(topContent, reactPost, commentsContainer)
     // add to feed (top first like social media)
     feed.prepend(div);
 

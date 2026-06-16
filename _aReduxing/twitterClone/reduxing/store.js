@@ -1,4 +1,4 @@
-import { postReducer } from "./postReducer.js";
+import { rootReducer } from "./rootReducer.js";
 
 
 export default function createStore(middlewares = []){
@@ -11,6 +11,14 @@ export default function createStore(middlewares = []){
     
     let state = {
         posts: postsState,
+        comments: {
+            byId: {},
+            allIds: []
+        },
+        users: {
+            byId: {},
+            allIds: []
+        }
     };
 
     let listeners = [];
@@ -28,7 +36,7 @@ export default function createStore(middlewares = []){
     }
 
     function dispatch(action){
-        state = postReducer(state, action);
+        state = rootReducer(state, action);
         
         listeners.forEach(fn => fn());
     }

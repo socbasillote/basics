@@ -1,5 +1,5 @@
 import { postEvents } from "./events/postEvents.js";
-import { persistData } from "./reduxing/persistData.js";
+import { persistData } from "./reduxing/middlewares/persistData.js";
 import createStore from "./reduxing/store.js";
 import { createPost } from "./ui/contentElement.js";
 
@@ -24,14 +24,17 @@ function addPost(text){
 
     const newPost = { 
         id: crypto.randomUUID(),
+        authorId: 'user',
+        content: text,
+        media: '',
         createdAt: Date.now(),
-        text,
-        count: 0
+        
+        likeCount: 0,
 
+        commentIds: [],
     }
 
     store.dispatch({type: 'ADD_POST', payload: newPost})
-    console.log(store.getState());
 }
 
 
