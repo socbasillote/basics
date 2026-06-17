@@ -5,16 +5,16 @@ export function commentReducer(state, action){
     switch(action.type){
         case 'ADD_COMMENT': {
             const comment = action.payload;
-
+            
             return {
                 ...state,
                 comments: {
+                    ...state.comments, 
                     byId: {
-                        ...state.comments.byId,
-                        [comment.id]: comment
+                        ...state.comments.byId, [comment.id]: action.payload // id, postId, content, createdAt
                     },
-                    
-                    allIds: [...state.comments.allIds, comment.id]
+                    allids: [...state.comments.allids, commentId]
+
                 },
 
                 post: {

@@ -1,7 +1,7 @@
 import { postEvents } from "./events/postEvents.js";
 import { persistData } from "./reduxing/middlewares/persistData.js";
 import createStore from "./reduxing/store.js";
-import { createComment, createPost } from "./ui/contentElement.js";
+import { createPost } from "./ui/contentElement.js";
 
 const form = document.getElementById('postForm');
 const commentForm = document.getElementById('commentForm')
