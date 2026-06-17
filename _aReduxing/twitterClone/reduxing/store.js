@@ -5,21 +5,17 @@ export default function createStore(middlewares = []){
 
 
     const postsState = JSON.parse(localStorage.getItem('posts')) || {
-        byId: {},
-        allIds: []
-    };
-    
-    let state = {
-        posts: postsState,
+        posts: {
+            byId: {},
+            allIds: []
+        },
         comments: {
             byId: {},
             allIds: []
         },
-        users: {
-            byId: {},
-            allIds: []
-        }
     };
+    
+    let state = postsState
 
     let listeners = [];
 

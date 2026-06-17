@@ -1,39 +1,18 @@
-
-
-export function commentReducer(state, action){
-
-    switch(action.type){
+export function commentsReducer(state, action) {
+    switch (action.type) {
         case 'ADD_COMMENT': {
             const comment = action.payload;
-            
             return {
                 ...state,
-                comments: {
-                    ...state.comments, 
                     byId: {
-                        ...state.comments.byId, [comment.id]: action.payload // id, postId, content, createdAt
+                        ...state.byId,
+                        [comment.id]: comment
                     },
-                    allids: [...state.comments.allids, commentId]
-
-                },
-
-                post: {
-                    ...state.posts,
-
-                    byId: {
-                        ...state.posts.byId,
-
-                        [comment.postId]: {
-                            ...state.posts.byId[comment.postId],
-
-                            commentIds: [
-                                ...state.posts.byId[comment.postId].commentIds,
-                                comment.id
-                            ]
-                        }
-                    }
-                }
+                    allIds: [...state.allIds, comment.id]
             }
         }
+
+        default:
+            return state;
     }
 }

@@ -67,7 +67,7 @@ export function createPost(post, feed){
     // Comment
     const commentsContainer = document.createElement('div');
     commentsContainer.className = 'commentsContainer';
-    commentsContainer.style.display = 'none'
+
 
     const commentForm = document.createElement('form');
     commentForm.className = 'commentForm';
@@ -87,13 +87,13 @@ export function createPost(post, feed){
     const commentsList = document.createElement('div');
     commentsList.className = 'commentsList';
 
-    commentsContainer.append(commentForm, commentsList);
+ 
     // appending
     const rightReactPost = document.createElement('div');
     rightReactPost.className = 'rightReactPost';
 
     const savePost = document.createElement('a');
-    savePost.innerHTML = `<i class="fa-solid fa-floppy-disk"></i>`
+    savePost.innerHTML = `<i class="fa-solid fa-bookmark"></i>`
     savePost.className = 'savePost';
 
     topContent.append(postContent, editBtn);
@@ -105,12 +105,27 @@ export function createPost(post, feed){
 
 
     
-    div.append(topContent, reactPost, commentsContainer)
-    // add to feed (top first like social media)
-    feed.prepend(div);
+    commentsContainer.append(commentsList);
 
-    // clear input 
+div.append(topContent, reactPost, commentsContainer);
+feed.prepend(div);
+
+return commentsList;
     
 }
 
+export function createComment(comment, commentsList) {
+    if(!comment){
+        console.log('bug', comment)
+        return;
+    }
+    const commentEl = document.createElement('div');
+    commentEl.className = 'comment';
 
+    commentEl.innerHTML = `
+        <div>${comment.content}</div>
+        <div class="date">${comment.createdAt}</div>
+    `;
+
+    commentsList.appendChild(commentEl);
+}

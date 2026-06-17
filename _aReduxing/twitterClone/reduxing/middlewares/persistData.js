@@ -6,7 +6,7 @@ export const persistData =
             action => {
                 const result = next(action);
 
-                localStorage.setItem('posts', JSON.stringify(store.getState().posts));
+                localStorage.setItem('posts', JSON.stringify(store.getState()));
 
                 return result;
             }
