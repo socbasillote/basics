@@ -1,6 +1,5 @@
 import { addComment, addPost } from "./Handler.js";
 
-
 export function postEvents(store, feed) {
 
     const postForm = document.getElementById('postForm');

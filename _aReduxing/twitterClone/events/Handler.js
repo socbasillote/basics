@@ -13,7 +13,13 @@ export function addPost(text, store){
         commentIds: [],
     }
 
-    store.dispatch({type: 'ADD_POST', payload: newPost})
+    store.dispatch(postthunk())
+    function postthunk(){
+        return function(dispatch, getState){
+            dispatch({type: 'ADD_POST', payload: newPost})
+        }
+    }
+
 }
 export function addComment(text, store, activePostId){
     const newComment = { 
@@ -23,6 +29,5 @@ export function addComment(text, store, activePostId){
             content: text,
             createdAt: Date.now()
         }
-
         store.dispatch({type: 'ADD_COMMENT', payload: newComment})
 }
