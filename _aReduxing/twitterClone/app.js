@@ -37,7 +37,7 @@ function addPost(text){
 
     const newPost = { 
         id: crypto.randomUUID(),
-        authorId: 'user',
+        authorId: 'user1',
         content: text,
         media: '',
         createdAt: Date.now(),

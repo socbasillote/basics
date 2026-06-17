@@ -5,6 +5,18 @@ export function createPost(post, feed){
     div.dataset.id = post.id
     div.className = 'post';
 
+    const userPostInfo = document.createElement('div');
+    userPostInfo.className = 'userPostInfo';
+
+    const userImage = document.createElement('img');
+    userImage.className = 'userPostImage';
+    userImage.src = './images/profileAvatar.png'
+    userImage.alt = 'userImage'
+
+    const postUserName = document.createElement('div');
+    postUserName.textContent = post.authorId
+
+
     const topContent = document.createElement('div');
     topContent.className = 'topContentPost'
 
@@ -60,7 +72,7 @@ export function createPost(post, feed){
     commentPost.className = 'commentPost';
 
     const countCommentPost = document.createElement('span');
-    countCommentPost.textContent = '1'
+    countCommentPost.textContent = post.commentIds.length
 
     commentPostWrapper.append(commentPost, countCommentPost);
 
@@ -89,6 +101,9 @@ export function createPost(post, feed){
 
  
     // appending
+
+    userPostInfo.append(userImage, postUserName);
+
     const rightReactPost = document.createElement('div');
     rightReactPost.className = 'rightReactPost';
 
@@ -107,7 +122,7 @@ export function createPost(post, feed){
     
     commentsContainer.append(commentsList);
 
-div.append(topContent, reactPost, commentsContainer);
+div.append(userPostInfo, topContent, reactPost, commentsContainer);
 feed.prepend(div);
 
 return commentsList;
@@ -124,6 +139,7 @@ export function createComment(comment, commentsList) {
 
     commentEl.innerHTML = `
         <div>${comment.content}</div>
+        <div>Author: ${comment.authorId}</div>
         <div class="date">${comment.createdAt}</div>
     `;
 

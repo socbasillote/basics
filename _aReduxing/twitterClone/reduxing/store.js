@@ -13,6 +13,12 @@ export default function createStore(middlewares = []){
             byId: {},
             allIds: []
         },
+        users: { 
+            // user will only get comments and post by reference. 
+            // Each posts have userid on it
+            byId: {},
+            allIds: []
+        },
     };
     
     let state = postsState
