@@ -1,29 +1,28 @@
-import { rootReducer } from "./rootReducer.js";
-
+import { getPosts } from "../api/posts.js";
+import { postsReducer } from "./reducers/postReducer.js";
 
 export default function createStore(middlewares = []){
 
 
-    const postsState = JSON.parse(localStorage.getItem('posts')) || {
-        posts: {
-            byId: {},
-            allIds: []
-        },
-        comments: {
-            byId: {},
-            allIds: []
-        },
-        users: { 
-            // user will only get comments and post by reference. 
-            // Each posts have userid on it
-            byId: {},
-            allIds: []
-        },
-    };
     
-    let state = postsState
+    let state = {
+        posts: [],
+        loading: true
+    }
 
     let listeners = [];
+
+    async function init(){
+        const postsState = await getPosts();
+
+        state = {
+            ...state,
+            posts: postsState.data,
+            loading: false
+        };
+        listeners.forEach(fn => fn());
+    }
+    init();
 
     function getState(){
         return state;
@@ -38,7 +37,7 @@ export default function createStore(middlewares = []){
     }
 
     function dispatch(action){
-        state = rootReducer(state, action);
+        state = postsReducer(state, action);
         
         listeners.forEach(fn => fn());
     }

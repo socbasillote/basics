@@ -2,15 +2,11 @@
 export function addPost(text, store){
 
     const newPost = { 
-        id: crypto.randomUUID(),
         authorId: 'user2',
         content: text,
         media: '',
-        createdAt: Date.now(),
         
         likeCount: 0,
-
-        commentIds: [],
     }
 
     store.dispatch(postthunk())

@@ -72,7 +72,7 @@ export function createPost(post, feed){
     commentPost.className = 'commentPost';
 
     const countCommentPost = document.createElement('span');
-    countCommentPost.textContent = post.commentIds.length
+    countCommentPost.textContent = '1'
 
     commentPostWrapper.append(commentPost, countCommentPost);
 
