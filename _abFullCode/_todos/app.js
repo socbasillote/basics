@@ -11,10 +11,11 @@ import { rootReducer } from "./rootReducer.js";
 import { filterActions } from "./slices/filterSlice.js";
 import { themeActions } from "./slices/themeSlice.js";
 import { priorityActions } from "./slices/prioritySlice.js";
+import { fetchTodoIdea } from "./middleware/todoIdeaThunk.js";
 
 const store = createStore(
     rootReducer,
-    [loggerMiddleware]
+    [fetchTodoIdea ,loggerMiddleware]
 );
 
 const input =
