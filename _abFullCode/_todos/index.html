@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vanilla Redux Style App</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h2>Todo App</h2>
+    <button id="themeBtn">Toggle Theme</button>
+
+    <div class="priorities">
+        <button id="allPriorityBtn">All</button>
+        <button id="highBtn">High</button>
+        <button id="mediumBtn">Medium</button>
+        <button id="lowBtn">Low</button>
+    </div>
+    <div class="buttons">
+        <button id="allBtn">All</button>
+    <button id="activeBtn">Active</button>
+    <button id="completedBtn">Completed</button>
+    </div>
+
+    <input id="todoInput" placeholder="Enter todo">
+    <select id="prioritySelect">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select>
+    <button id="addBtn">Add</button>
+
+    <ul id="todoList"></ul>
+
+    <script type="module" src="./app.js"></script>
+
+</body>
+</html>
