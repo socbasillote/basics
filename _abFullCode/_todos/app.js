@@ -12,10 +12,11 @@ import { filterActions } from "./slices/filterSlice.js";
 import { themeActions } from "./slices/themeSlice.js";
 import { priorityActions } from "./slices/prioritySlice.js";
 import { fetchTodoIdea } from "./middleware/todoIdeaThunk.js";
+import { thunkMiddleware } from "./middleware/thunkMiddleware.js";
 
 const store = createStore(
     rootReducer,
-    [fetchTodoIdea ,loggerMiddleware]
+    [thunkMiddleware ,loggerMiddleware]
 );
 
 const input =
@@ -151,6 +152,12 @@ allPriorityBtn.onclick = () => {
     store.dispatch(
         priorityActions.setPriority("all")
     )
+}
+
+
+const ideaBtn = document.getElementById('ideaBtn');
+ideaBtn.onclick = () => {
+    store.dispatch(fetchTodoIdea());
 }
 
 render();
